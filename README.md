@@ -1,2 +1,2 @@
-# packmaniTegijad
-packmani projekt
+# pacmaniTegijad
+pacmani projekt
