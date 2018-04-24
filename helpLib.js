@@ -83,25 +83,25 @@ var testLib = {
 
   keys: function(){
     document.onkeydown = function(event){
-      if(event.keyCode === 68)
+      if(event.keyCode === 68 || event.keyCode === 39)   //d
         moving.r = true;
-      else if(event.keyCode === 83)   //s
+      else if(event.keyCode === 83 || event.keyCode === 40)   //s
     		moving.d = true;
-      else if(event.keyCode === 65) //a
+      else if(event.keyCode === 65 || event.keyCode === 37) //a
     		moving.l = true;
-      else if(event.keyCode === 87) // w
+      else if(event.keyCode === 87 || event.keyCode === 38) // w
     		moving.u = true;
       else if(event.keyCode === 32) // space
         moving.s = true;
       }
       document.onkeyup = function(event){
-    		if(event.keyCode === 68)    //d
+    		if(event.keyCode === 68 || event.keyCode === 39)    //d
     			moving.r = false;
-    		else if(event.keyCode === 83)   //s
+    		else if(event.keyCode === 83 || event.keyCode === 40)   //s
     		  moving.d = false;
-    		else if(event.keyCode === 65) //a
+    		else if(event.keyCode === 65 || event.keyCode === 37) //a
     			moving.l = false;
-    		else if(event.keyCode === 87) // w
+    		else if(event.keyCode === 87 || event.keyCode === 38) // w
     			moving.u = false;
         else if(event.keyCode === 32) // space
           moving.s = false;
