@@ -54,6 +54,7 @@ class Pacman{
       this.speedY = 0;
     }
   }
+  
   checkWall(wall, xy){
     var moveAvailable = {
       l:true,
@@ -80,25 +81,7 @@ class Pacman{
         }
         break;
       }
-
-      // if(testLib.checkWalls(wall[i], pcOffBound).l){
-      //   moveAvailable.l = false;
-      //   this.speedX = 0;
-      // }
-      // if(testLib.checkWalls(wall[i], pcOffBound).r){
-      //   moveAvailable.r = false;
-      //   this.speedX = 0;
-      // }
-      // if(testLib.checkWalls(wall[i], pcOffBound).u){
-      //   moveAvailable.u = false;
-      //   this.speedY = 0;
-      // }
-      // if(testLib.checkWalls(wall[i], pcOffBound).d){
-      //   moveAvailable.d = false;
-      //   this.speedY = 0;
-      // }
     }
-    // return moveAvailable;
   }
 
   getOffsetBound(pacPosition){
@@ -110,6 +93,4 @@ class Pacman{
     };
     return offRect;
   }
-
-
 }
