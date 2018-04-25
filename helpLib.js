@@ -81,6 +81,30 @@ var testLib = {
     rectA.y < rectB.y + rectB.h && rectA.y + rectA.h > rectB.y);
   },
 
+  checkWalls: function(wall, pcMan){
+    var wallIsPresent = {
+      l:false,
+      r:false,
+      u:false,
+      d:false
+    };
+    var tresh = 3;
+    if(pcMan.x < wall.x + wall.w && pcMan.x + tresh > wall.x + wall.w && pcMan.y <= wall.y + wall.h && pcMan.y + pcMan.h >= wall.y){
+      wallIsPresent.l = true;
+    }
+    if(pcMan.x + pcMan.w > wall.x &&  pcMan.x + pcMan.w - tresh < wall.x && pcMan.y <= wall.y + wall.h && pcMan.y + pcMan.h >= wall.y){
+      wallIsPresent.r = true;
+    }
+    if(pcMan.y < wall.y + wall.h && pcMan.y + tresh > wall.y + wall.h && pcMan.x <= wall.x + wall.w && pcMan.x + pcMan.w >= wall.x){
+      wallIsPresent.u = true;
+    }
+    if(pcMan.y + pcMan.h > wall.y &&  pcMan.y + pcMan.h - tresh < wall.y && pcMan.x <= wall.x + wall.w && pcMan.x + pcMan.w >= wall.x){
+      wallIsPresent.d = true;
+    }
+    //console.log(wallIsPresent);
+    return wallIsPresent;
+  },
+
   keys: function(){
     document.onkeydown = function(event){
       if(event.keyCode === 68 || event.keyCode === 39)   //d
