@@ -1,9 +1,11 @@
 var moving = {
-  u: false,
-  d: false,
-  r: false,
-  l: false,
-  s: false
+  u:false,
+  d:false,
+  r:false,
+  l:false,
+  s:false,
+  save:false,
+  load:false
 };
 
 var testLib = {
@@ -107,6 +109,7 @@ var testLib = {
 
   keys: function(){
     document.onkeydown = function(event){
+      console.log(event.keyCode);
       if(event.keyCode === 68 || event.keyCode === 39)   //d
         moving.r = true;
       else if(event.keyCode === 83 || event.keyCode === 40)   //s
@@ -117,6 +120,10 @@ var testLib = {
     		moving.u = true;
       else if(event.keyCode === 32) // space
         moving.s = true;
+      else if(event.keyCode === 88) // x
+        moving.save = true;
+      else if(event.keyCode === 76) // l
+        moving.load = true;
       }
       document.onkeyup = function(event){
     		if(event.keyCode === 68 || event.keyCode === 39)    //d
@@ -129,6 +136,10 @@ var testLib = {
     			moving.u = false;
         else if(event.keyCode === 32) // space
           moving.s = false;
+        else if(event.keyCode === 88) // x
+          moving.save = false;
+        else if(event.keyCode === 76) // l
+          moving.load = false;
         }
         return moving;
   }
