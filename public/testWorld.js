@@ -75,10 +75,10 @@ class TestWorld{
       this.delWall(this.wall);
       this.delWall(this.branch);
     }
-    if(this.showWorld)
-    this.show(this.wall, color("lightBlue"));
-    this.show(this.branch, color(255));
-
+    if(this.showWorld){
+      this.show(this.wall, color("lightBlue"));
+      this.show(this.branch, color(255));
+    }
     if(this.sW && testLib.keys().w){
       this.showWorld = !this.showWorld;
       this.sW = false;
