@@ -167,15 +167,15 @@ class Ghost{
 
     var brobDir = Math.random() * 100;
     // this might be suspicious
-    if(brobDir < 40 && !this.u){
+    if(brobDir < 35 && !this.u){
       this.u = pacDir.u;
       this.d = pacDir.d;
     }
-    else if(brobDir < 80 && !this.r){
+    else if(brobDir < 70 && !this.r){
       this.r = pacDir.r;
       this.l = pacDir.l;
     }
-    else if(brobDir < 90 && !this.d){
+    else if(brobDir < 85 && !this.d){
       this.u = pacDir.d;
       this.d = pacDir.u;
     }
