@@ -135,7 +135,7 @@ var testLib = {
     		  moving.d = false;
     		else if(event.keyCode === 65 || event.keyCode === 37) //a
     			moving.l = false;
-    		else if(event.keyCode === 87 || event.keyCode === 38) // w
+    		else if(event.keyCode === 38) // w
     			moving.u = false;
         else if(event.keyCode === 32) // space
           moving.s = false;
