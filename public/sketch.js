@@ -46,7 +46,7 @@ function restartWorld(){
 	pac = new Pacman({x:30, y:30}, {w:20, h:20}, 5, "up");
 	ghosts = [];
 	for(var i = 0; i < numOfGhosts; i++){
-		ghosts.push(new Ghost({x:280, y:190}, {w:20, h:20}, 4, "up"));
+		ghosts.push(new Ghost({x:280, y:190}, {w:20, h:20}, 5, "up"));
 	}
 }
 function lS(){
