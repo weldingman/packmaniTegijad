@@ -109,7 +109,7 @@ var testLib = {
 
   keys: function(){
     document.onkeydown = function(event){
-      console.log(event.keyCode);
+      //console.log(event.keyCode);
       if(event.keyCode === 68 || event.keyCode === 39)   //d
         moving.r = true;
       else if(event.keyCode === 83 || event.keyCode === 40)   //s
