@@ -2641,12 +2641,25 @@
       "h": 20
     }
   ],
-  "branch": [],
+  "branch": [
+    {
+      "x": 300,
+      "y": 160,
+      "w": 20,
+      "h": 20
+    },
+    {
+      "x": 320,
+      "y": 160,
+      "w": 20,
+      "h": 20
+    }
+  ],
   "w": 20,
   "h": 20,
   "wallBranch": [],
   "loadWorld": true,
   "saveWorld": true,
-  "showWorld": true,
-  "sW": false
+  "showWorld": false,
+  "sW": true
 }
