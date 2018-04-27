@@ -32,8 +32,9 @@ function draw() {
 	background(0);
   pac.update(world.update().wall);
 	for(var i = 0; i < ghosts.length; i++){
-	if(ghost[i].update(world.update(), pac)){
-		restartWorld();
+		if(ghost[i].update(world.update(), pac)){
+			restartWorld();
+		}
 	}
 	lS();
 }
