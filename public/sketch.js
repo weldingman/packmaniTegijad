@@ -26,7 +26,9 @@ function setup() {
 function draw() {
 	background(0);
   pac.update(world.update().wall);
-	ghost.update(world.update(), pac);
+	if(ghost.update(world.update(), pac)){
+		console.log("pacman is captured!!!");
+	}
 	ghost2.update(world.update(), pac);
 	lS();
 }

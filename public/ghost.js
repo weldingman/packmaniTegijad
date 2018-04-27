@@ -21,6 +21,7 @@ class Ghost{
 
     this.y += this.speedY;
     this.x += this.speedX;
+    return getPac(pac);
   }
 
   show(){
@@ -126,6 +127,9 @@ class Ghost{
     }
   }
 
+  getPac(pacman){
+    return testLib.rectRectCol(this, pacman);
+  }
   getOffsetBound(pacPosition){
     var offRect = {
       x:pacPosition.x + this.speedX,
