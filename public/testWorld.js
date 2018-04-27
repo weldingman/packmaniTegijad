@@ -1,11 +1,9 @@
 class TestWorld{
-  constructor(size, wall = []){
+  constructor(size, wall = [], branch = []){
     this.wall = wall;
-    this.branch = [];
+    this.branch = branch;
     this.w = size.w;
     this.h = size.h;
-    this.gridX = [];
-    this.gridY = [];
     this.wallBranch = [];
     this.loadWorld = true;
     this.saveWorld = true;
