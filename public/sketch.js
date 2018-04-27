@@ -16,7 +16,7 @@ function preload(){
 }
 
 function setup() {
-	bg = loadImage("Pacman.jpg");
+	bg = loadImage("wall2.png");
 	createCanvas(640, 480);
 	//const canvasElt = createCanvas(640, 480).elt;
   //canvasElt.style.width = '50%', canvasElt.style.height = '50%';
