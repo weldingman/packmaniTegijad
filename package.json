@@ -1,0 +1,23 @@
+{
+  "name": "packmaniTegijad",
+  "version": "1.0.0",
+  "description": "pacmani projekt",
+  "main": "ghost.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weldingman/packmaniTegijad.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weldingman/packmaniTegijad/issues"
+  },
+  "homepage": "https://github.com/weldingman/packmaniTegijad#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
