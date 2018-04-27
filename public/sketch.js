@@ -30,7 +30,7 @@ function setup() {
 
 function draw() {
 	background(0);
-	frameRate(30);
+	frameRate(100);
   pac.update(world.update().wall);
 	for(var i = 0; i < ghosts.length; i++){
 		if(ghosts[i].update(world.update(), pac)){
