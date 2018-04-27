@@ -7,6 +7,8 @@ class TestWorld{
     this.wallBranch = [];
     this.loadWorld = true;
     this.saveWorld = true;
+    this.showWorld = false;
+    this.sW = true;
   };
 
   addWall(wallType, size){
@@ -73,8 +75,17 @@ class TestWorld{
       this.delWall(this.wall);
       this.delWall(this.branch);
     }
-    //this.show(this.wall, color("lightBlue"));
-    //this.show(this.branch, color(255));
+    if(this.showWorld)
+    this.show(this.wall, color("lightBlue"));
+    this.show(this.branch, color(255));
+
+    if(this.sW && testLib.keys().w){
+      this.showWorld = this.showWorld!;
+      this.sW = false;
+    }
+    if(!testLib.keys().w){
+      this.sW = true;
+    }
     return {wall:this.wall,branch:this.branch};
   }
 
@@ -104,8 +115,5 @@ class TestWorld{
   snap(val, dim){
     var snapCndidate = dim * Math.floor(val/dim);
     return snapCndidate;
-  }
-
-  save(){
   }
 }

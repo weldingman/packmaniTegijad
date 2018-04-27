@@ -4,6 +4,7 @@ var moving = {
   r:false,
   l:false,
   s:false,
+  w:false,
   save:false,
   load:false
 };
@@ -116,7 +117,7 @@ var testLib = {
     		moving.d = true;
       else if(event.keyCode === 65 || event.keyCode === 37) //a
     		moving.l = true;
-      else if(event.keyCode === 87 || event.keyCode === 38) // w
+      else if(event.keyCode === 38) // w
     		moving.u = true;
       else if(event.keyCode === 32) // space
         moving.s = true;
@@ -124,6 +125,8 @@ var testLib = {
         moving.save = true;
       else if(event.keyCode === 76) // l
         moving.load = true;
+      else if(event.keyCode === 87) // w
+      	moving.w = true;
       }
       document.onkeyup = function(event){
     		if(event.keyCode === 68 || event.keyCode === 39)    //d
@@ -140,7 +143,10 @@ var testLib = {
           moving.save = false;
         else if(event.keyCode === 76) // l
           moving.load = false;
+        else if(event.keyCode === 87) // w
+          moving.w = false;
         }
+
         return moving;
   }
 }
