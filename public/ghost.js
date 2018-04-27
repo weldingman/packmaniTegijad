@@ -21,7 +21,7 @@ class Ghost{
 
     this.y += this.speedY;
     this.x += this.speedX;
-    return getPac(pac);
+    return this.getPac(pac);
   }
 
   show(){
