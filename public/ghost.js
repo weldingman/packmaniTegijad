@@ -117,7 +117,9 @@ class Ghost{
           this.speedX = 0;
           this.speedY = 0;
           this.branchFlag = i;
-          this.randMove(pac);
+          if(Math.random()<0.1){
+            this.randMove(pac);
+          }
           break;
         }
       }
