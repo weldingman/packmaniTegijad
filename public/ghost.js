@@ -25,7 +25,7 @@ class Ghost{
   }
 
   show(){
-    fill("yellow");
+    fill("red");
     ellipse(this.x, this.y, this.w, this.h);
   }
 
