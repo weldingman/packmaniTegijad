@@ -4,6 +4,8 @@ var pac;
 var world;
 var ghost;
 var ghost2;
+var ghosts = [];
+var numOfGhosts = 6;
 var saveWorld = true;
 var loadWorld = true;
 let preWorld;
@@ -17,8 +19,11 @@ function setup() {
 	const canvasElt = createCanvas(640, 480).elt;
   canvasElt.style.width = '50%', canvasElt.style.height = '50%';
   pac = new Pacman({x:100, y:100}, {w:40, h:40}, 5, "up");
-	ghost = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
-	ghost2 = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
+	for(var i = 0; i < numOfGhosts; i++){
+		ghosts.push(new Ghost({x:200, y:200}, {w:40, h:40}, 4, "up"));
+	}
+	// ghost = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
+	// ghost2 = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
   world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch);
 	console.log(preWorld);
 }
@@ -26,12 +31,12 @@ function setup() {
 function draw() {
 	background(0);
   pac.update(world.update().wall);
-	if(ghost.update(world.update(), pac) || ghost2.update(world.update(), pac)){
+	for(var i = 0; i < ghosts.length; i++){
+	if(ghost[i].update(world.update(), pac)){
 		restartWorld();
 	}
 	lS();
 }
-
 
 function restartWorld(){
 	pac = new Pacman({x:100, y:100}, {w:40, h:40}, 5, "up");
