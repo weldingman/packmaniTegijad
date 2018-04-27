@@ -13,7 +13,9 @@ function preload(){
 }
 
 function setup() {
-	createCanvas(640, 480);
+	//createCanvas(640, 480);
+	const canvasElt = createCanvas(640, 480).elt;
+  canvasElt.style.width = '100%', canvasElt.style.height = '100%';
   pac = new Pacman({x:100, y:100}, {w:40, h:40}, 5, "up");
 	ghost = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
 	ghost2 = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
