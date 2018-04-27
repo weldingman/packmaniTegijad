@@ -16,7 +16,7 @@ function preload(){
 }
 
 function setup() {
-	bg = loadImage("wall3.jpg");
+	bg = loadImage("dreamWorld4.jpg");
 	createCanvas(640, 480);
 	//const canvasElt = createCanvas(640, 480).elt;
   //canvasElt.style.width = '50%', canvasElt.style.height = '50%';
