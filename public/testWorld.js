@@ -73,8 +73,8 @@ class TestWorld{
       this.delWall(this.wall);
       this.delWall(this.branch);
     }
-    this.show(this.wall, color("lightBlue"));
-    this.show(this.branch, color(255));
+    //this.show(this.wall, color("lightBlue"));
+    //this.show(this.branch, color(255));
     return {wall:this.wall,branch:this.branch};
   }
 

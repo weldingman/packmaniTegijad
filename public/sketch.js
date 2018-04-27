@@ -9,12 +9,14 @@ var numOfGhosts = 4;
 var saveWorld = true;
 var loadWorld = true;
 let preWorld;
+var bg;
 
 function preload(){
 	preWorld = loadJSON("world.json");
 }
 
 function setup() {
+	bg = loadImage("Pacman.jpg");
 	createCanvas(640, 480);
 	//const canvasElt = createCanvas(640, 480).elt;
   //canvasElt.style.width = '50%', canvasElt.style.height = '50%';
@@ -29,7 +31,7 @@ function setup() {
 }
 
 function draw() {
-	background(0);
+	background(bg);
 	frameRate(60);
   pac.update(world.update().wall);
 	for(var i = 0; i < ghosts.length; i++){
