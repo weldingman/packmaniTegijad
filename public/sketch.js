@@ -20,9 +20,9 @@ function setup() {
 	createCanvas(640, 480);
 	//const canvasElt = createCanvas(640, 480).elt;
   //canvasElt.style.width = '50%', canvasElt.style.height = '50%';
-  pac = new Pacman({x:40, y:40}, {w:20, h:20}, 3, "up");
+  pac = new Pacman({x:20, y:20}, {w:20, h:20}, 3, "up");
 	for(var i = 0; i < numOfGhosts; i++){
-		ghosts.push(new Ghost({x:320, y:220}, {w:20, h:20}, 2, "up"));
+		ghosts.push(new Ghost({x:280, y:190}, {w:20, h:20}, 2, "up"));
 	}
 	// ghost = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
 	// ghost2 = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
@@ -43,10 +43,10 @@ function draw() {
 }
 
 function restartWorld(){
-	pac = new Pacman({x:40, y:40}, {w:40, h:40}, 5, "up");
+	pac = new Pacman({x:20, y:20}, {w:20, h:20}, 5, "up");
 	ghosts = [];
 	for(var i = 0; i < numOfGhosts; i++){
-		ghosts.push(new Ghost({x:320, y:22}, {w:20, h:20}, 4, "up"));
+		ghosts.push(new Ghost({x:280, y:190}, {w:20, h:20}, 4, "up"));
 	}
 }
 function lS(){

@@ -80,6 +80,7 @@ class TestWorld{
       this.show(this.branch, color(255));
     }
     if(this.sW && testLib.keys().w){
+      console.log("shoeing/hiding world");
       this.showWorld = !this.showWorld;
       this.sW = false;
     }
