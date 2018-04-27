@@ -5,7 +5,7 @@ var world;
 var ghost;
 var ghost2;
 var ghosts = [];
-var numOfGhosts = 10;
+var numOfGhosts = 5;
 var saveWorld = true;
 var loadWorld = true;
 let preWorld;
