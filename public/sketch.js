@@ -26,13 +26,18 @@ function setup() {
 function draw() {
 	background(0);
   pac.update(world.update().wall);
-	if(ghost.update(world.update(), pac)){
-		console.log("pacman is captured!!!");
+	if(ghost.update(world.update(), pac) || ghost2.update(world.update(), pac)){
+		restartWorld();
 	}
-	ghost2.update(world.update(), pac);
 	lS();
 }
 
+
+function restartWorld(){
+	pac = new Pacman({x:100, y:100}, {w:40, h:40}, 5, "up");
+	ghost = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
+	ghost2 = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
+}
 function lS(){
 	if(testLib.keys().save && saveWorld){
 		this.saveWorld = false;
