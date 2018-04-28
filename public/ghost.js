@@ -94,7 +94,7 @@ class Ghost{
         }
 
         var tempTrace = this.tracePacman(trace);
-        console.log(tempTrace);
+        //console.log(tempTrace);
 
         if(tempTrace != null){
           this.u = false;
@@ -169,8 +169,9 @@ class Ghost{
   tracePacman(trace){
     for(var i = 0; i < trace.length; i++){
       if(testLib.rectRectCol(trace[i], this)){
-        var tempTraceDir = trace[i].traceDir;
+        var tempTraceDir = trace[i].pacDir;
         if(tempTraceDir != "random"){
+          //console.log(tempTraceDir);
           return tempTraceDir;
         }
         else return null;
@@ -206,15 +207,15 @@ class Ghost{
 
     var brobDir = Math.random() * 100;
     // this might be suspicious
-    if(brobDir < 35 && !this.u){
+    if(brobDir < 30 && !this.u){
       this.u = pacDir.u;
       this.d = pacDir.d;
     }
-    else if(brobDir < 70 && !this.r){
+    else if(brobDir < 60 && !this.r){
       this.r = pacDir.r;
       this.l = pacDir.l;
     }
-    else if(brobDir < 85 && !this.d){
+    else if(brobDir < 80 && !this.d){
       this.u = pacDir.d;
       this.d = pacDir.u;
     }
