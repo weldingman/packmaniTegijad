@@ -16,7 +16,7 @@ class TestWorld{
 
   update(pacman){
     this.updatePacTrace(pacman);
-
+    this.pacmanEatFood(pacman);
     if(mouseIsPressed && mouseButton === LEFT){
       if(testLib.keys().s){
         this.addWall(this.branch, {w:20, h:20}, null);
@@ -127,6 +127,20 @@ class TestWorld{
     for(var i = 0; i < this.pacTrace.length; i++){
       if(testLib.rectRectCol(pacman, this.pacTrace[i])){
         this.pacTrace[i].pacDir = pacman.dir;
+      }
+    }
+  }
+
+  pacmanEatFood(pacman){
+    for(var i = 0; i < this.food.length; i++){
+      var tempPacman = {
+        x:pacman.x - pacman.w / 2,
+        y:pacman.y - pacman.h / 2,
+        w:pacman.w,
+        h:pacman.h
+      }
+      if(testLib.rectRectCol(tempPacman, this.food[i])){
+        this.food.splice(i,1);
       }
     }
   }
