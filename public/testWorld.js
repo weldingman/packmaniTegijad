@@ -57,7 +57,7 @@ class TestWorld{
     if(this.showWorld){
       this.show(this.wall, color("lightBlue"));
       this.show(this.branch, color(255));
-      this.show(this.pacTrace, color("lightRed"));
+      this.show(this.pacTrace, color("red"));
     }
     if(this.sW && testLib.keys().w){
       console.log("shwing/hiding world");
