@@ -14,3 +14,11 @@ body {
   /* This centers our sketch vertically. */
   align-items: center;
 }
+
+input {
+
+    width: 80px;
+    font-size: 30px;
+    /*border: none;*/
+    background: transparent;
+}
