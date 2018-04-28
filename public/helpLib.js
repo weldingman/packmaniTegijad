@@ -130,7 +130,6 @@ var testLib = {
       	moving.w = true;
       else if(event.keyCode === 65) //a
         moving.pt = true;
-        }
       }
       document.onkeyup = function(event){
     		if(event.keyCode === 68 || event.keyCode === 39)    //d
