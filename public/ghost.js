@@ -15,7 +15,7 @@ class Ghost{
     this.branchFlag = -1;
   }
 
-  update(wall, pac){
+  update(world, pac){
     this.show();
     this.move(wall, pac);
 
@@ -57,7 +57,7 @@ class Ghost{
     else if(this.d){
       this.dir = "down";
       this.speedY = this.speed;
-      this.checkWall(wall.wall, "y", pac);
+      this.checkWall(wall.wall, "y", pac, wall.pacTrace);
       this.checkBranch(wall.branch, pac);
       //this.speedX = 0;
     }
@@ -66,7 +66,7 @@ class Ghost{
     }
   }
 
-  checkWall(wall, xy, pac){
+  checkWall(wall, xy, pac, trace){
     var moveAvailable = {
       l:true,
       r:true,
@@ -91,7 +91,28 @@ class Ghost{
         if(xy === "y"){
           this.speedY = 0;
         }
-        this.randMove(pac);
+        var tempTrace = this.tracePacman(trace);
+        if(tempTrace != null){
+          this.u = false;
+          this.d = false;
+          this.r = false;
+          this.l = false;
+          if(tempTrace === "up"){
+            this.u = true;
+          }
+          if(tempTrace === "down"){
+            this.d = true;
+          }
+          if(tempTrace === "left"){
+            this.l = true;
+          }
+          if(tempTrace === "right"){
+            this.r = true;
+          }
+        }
+        else{
+          this.randMove(pac);
+        }
         break;
       }
     }
@@ -139,6 +160,19 @@ class Ghost{
     };
     return offRect;
   }
+
+  tracePacman(trace){
+    for(var i = 0; i < trace.length; i++){
+      if(testLib.rectRectCol(trace[i], this)){
+        var tempTraceDir = trace[i].traceDir;
+        if(tempTraceDir != "random"){
+          return tempTraceDir;
+        }
+        else return null;
+      }
+    }
+  }
+
   randMove(pcMan){
     this.u = false;
     this.d = false;

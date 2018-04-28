@@ -34,8 +34,7 @@ class TestWorld{
     }
     if(!test){
       drawWall.x = this.snap(mouseX , size.w);
-      drawWall.y = this.snap(mouseY, size.h);
-      if(traceDir)
+      drawWall.y = this.snap(mouseY, size.h);  
       wallType.push(drawWall);
     }
   }
