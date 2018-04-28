@@ -34,14 +34,14 @@ class Ghost{
     if(this.r){
       this.dir = "right";
       this.speedX = this.speed;
-      this.checkWall(wall.wall, "x", pac);
+      this.checkWall(wall.wall, "x", pac, wall.pacTrace);
       this.checkBranch(wall.branch, pac);
       //this.speedY = 0;
     }
     else if(this.l){
       this.dir = "left";
       this.speedX = -this.speed;
-      this.checkWall(wall.wall, "x", pac);
+      this.checkWall(wall.wall, "x", pac, wall.pacTrace);
       this.checkBranch(wall.branch, pac);
       //this.speedY = 0;
     }
@@ -51,14 +51,14 @@ class Ghost{
     if(this.u){
       this.dir = "up";
       this.speedY = -this.speed;
-      this.checkWall(wall.wall, "y", pac);
+      this.checkWall(wall.wall, "y", pac, wall.pacTrace);
       this.checkBranch(wall.branch, pac);
       //this.speedX = 0;
     }
     else if(this.d){
       this.dir = "down";
       this.speedY = this.speed;
-      this.checkWall(wall.wall, "y", pac, wall);
+      this.checkWall(wall.wall, "y", pac, wall.pacTrace);
       this.checkBranch(wall.branch, pac);
       //this.speedX = 0;
     }
@@ -68,7 +68,6 @@ class Ghost{
   }
 
   checkWall(wall, xy, pac, trace){
-    console.log(trace);
     var moveAvailable = {
       l:true,
       r:true,
