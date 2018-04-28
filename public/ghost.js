@@ -17,7 +17,7 @@ class Ghost{
 
   update(world, pac){
     this.show();
-    this.move(wall, pac);
+    this.move(world, pac);
 
     this.y += this.speedY;
     this.x += this.speedX;
