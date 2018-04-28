@@ -33,9 +33,9 @@ function setup() {
 function draw() {
 	background(bg);
 	frameRate(60);
-  pac.update(world.update().wall);
+  pac.update(world.update(pac).wall);
 	for(var i = 0; i < ghosts.length; i++){
-		if(ghosts[i].update(world.update(), pac)){
+		if(ghosts[i].update(world.update(pac), pac)){
 			restartWorld();
 		}
 	}
