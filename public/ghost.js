@@ -58,7 +58,7 @@ class Ghost{
     else if(this.d){
       this.dir = "down";
       this.speedY = this.speed;
-      this.checkWall(wall.wall, "y", pac, wall);
+      this.checkWall(wall.wall, "y", pac, wall.pacTrace);
       this.checkBranch(wall.branch, pac);
       //this.speedX = 0;
     }
