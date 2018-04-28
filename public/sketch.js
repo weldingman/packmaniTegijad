@@ -26,7 +26,7 @@ function setup() {
 	}
 	// ghost = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
 	// ghost2 = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
-  world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch);
+  world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch, preWorld.pacTrace);
 	console.log(world);
 }
 
