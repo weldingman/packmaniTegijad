@@ -5,14 +5,14 @@ var world;
 var ghost;
 var ghost2;
 var ghosts = [];
-var numOfGhosts = 5;
+var numOfGhosts = 6;
 var saveWorld = true;
 var loadWorld = true;
 let preWorld;
 var bg;
 
 function preload(){
-	preWorld = loadJSON("world.json");
+	preWorld = loadJSON("world2.json");
 }
 
 function setup() {
@@ -24,18 +24,18 @@ function setup() {
 	for(var i = 0; i < numOfGhosts; i++){
 		ghosts.push(new Ghost({x:280, y:190}, {w:20, h:20}, 5, "up"));
 	}
-	// ghost = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
-	// ghost2 = new Ghost({x:200, y:200}, {w:40, h:40}, 5, "up");
-  world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch, preWorld.pacTrace);
+  world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch, preWorld.pacTrace, preWorld.food);
+	world.setPactraceRandom();
 	console.log(world);
 }
 
 function draw() {
 	background(bg);
 	frameRate(60);
-  pac.update(world.update(pac).wall);
+	var worldObj = world.update(pac);
+  pac.update(worldObj.wall);
 	for(var i = 0; i < ghosts.length; i++){
-		if(ghosts[i].update(world.update(pac), pac)){
+		if(ghosts[i].update(worldObj, pac)){
 			restartWorld();
 		}
 	}
@@ -43,6 +43,7 @@ function draw() {
 }
 
 function restartWorld(){
+	world.setPactraceRandom();
 	pac = new Pacman({x:30, y:30}, {w:20, h:20}, 5, "up");
 	ghosts = [];
 	for(var i = 0; i < numOfGhosts; i++){
