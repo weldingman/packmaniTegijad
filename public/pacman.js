@@ -23,8 +23,10 @@ class Pacman{
   }
 
   move(wall){
-    this.speedX = 0;
 
+    if(this.checkWall(wall, "x")){
+      this.speedX = 0;
+    }
     if(testLib.keys().r){
       this.speedX = this.speed;
       if(!this.checkWall(wall, "x")){
@@ -45,7 +47,10 @@ class Pacman{
       }
     }
 
-    this.speedY = 0;
+    if(this.checkWall(wall, "Y")){
+      this.speedY = 0;
+    }
+
     if(testLib.keys().u){
       this.speedY = -this.speed;
       if(!this.checkWall(wall, "y")){
