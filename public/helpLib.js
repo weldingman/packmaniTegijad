@@ -7,7 +7,8 @@ var moving = {
   w:false,
   pt:false,
   save:false,
-  load:false
+  load:false,
+  food:false
 };
 
 var testLib = {
@@ -130,6 +131,8 @@ var testLib = {
       	moving.w = true;
       else if(event.keyCode === 65) //a
         moving.pt = true;
+      else if(event.keyCode === 70) //f
+        moving.food = true;
       }
       document.onkeyup = function(event){
     		if(event.keyCode === 68 || event.keyCode === 39)    //d
@@ -150,6 +153,8 @@ var testLib = {
           moving.w = false;
         else if(event.keyCode === 65) //a
       		moving.pt = false;
+        else if(event.keyCode === 70) //f
+          moving.food = false;
         }
 
         return moving;
