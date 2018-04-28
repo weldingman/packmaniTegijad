@@ -30,7 +30,7 @@ class Ghost{
   }
 
   move(wall, pac){
-    console.log(wall.pacTrace);
+    //console.log(wall.pacTrace);
     if(this.r){
       this.dir = "right";
       this.speedX = this.speed;
