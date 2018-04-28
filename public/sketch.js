@@ -10,6 +10,7 @@ var saveWorld = true;
 var loadWorld = true;
 let preWorld;
 var bg;
+var score = 0;
 
 function preload(){
 	preWorld = loadJSON("world2.json");
