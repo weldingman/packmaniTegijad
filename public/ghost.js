@@ -94,6 +94,7 @@ class Ghost{
         }
 
         var tempTrace = this.tracePacman(trace);
+        console.log(tempTrace);
 
         if(tempTrace != null){
           this.u = false;
