@@ -52,14 +52,15 @@ class TestWorld{
     if(mouseIsPressed && mouseButton === RIGHT){
       this.delWall(this.wall);
       this.delWall(this.branch);
+      this.delWall(this.pacTrace);
     }
     if(this.showWorld){
       this.show(this.wall, color("lightBlue"));
       this.show(this.branch, color(255));
-      this.show(this.pacTrace, color("lightYellow"));
+      this.show(this.pacTrace, color("lightRed"));
     }
     if(this.sW && testLib.keys().w){
-      console.log("shoeing/hiding world");
+      console.log("shwing/hiding world");
       this.showWorld = !this.showWorld;
       this.sW = false;
     }
