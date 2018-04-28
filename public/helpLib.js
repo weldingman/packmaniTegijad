@@ -5,6 +5,7 @@ var moving = {
   l:false,
   s:false,
   w:false,
+  pt:false,
   save:false,
   load:false
 };
@@ -115,7 +116,7 @@ var testLib = {
         moving.r = true;
       else if(event.keyCode === 83 || event.keyCode === 40)   //s
     		moving.d = true;
-      else if(event.keyCode === 65 || event.keyCode === 37) //a
+      else if(event.keyCode === 37) //left arrow
     		moving.l = true;
       else if(event.keyCode === 38) // w
     		moving.u = true;
@@ -127,13 +128,16 @@ var testLib = {
         moving.load = true;
       else if(event.keyCode === 87) // w
       	moving.w = true;
+      else if(event.keyCode === 65) //a
+        moving.pt = true;
+        }
       }
       document.onkeyup = function(event){
     		if(event.keyCode === 68 || event.keyCode === 39)    //d
     			moving.r = false;
     		else if(event.keyCode === 83 || event.keyCode === 40)   //s
     		  moving.d = false;
-    		else if(event.keyCode === 65 || event.keyCode === 37) //a
+    		else if(event.keyCode === 37) //left arrow
     			moving.l = false;
     		else if(event.keyCode === 38) // w
     			moving.u = false;
@@ -145,6 +149,8 @@ var testLib = {
           moving.load = false;
         else if(event.keyCode === 87) // w
           moving.w = false;
+        else if(event.keyCode === 65) //a
+      		moving.pt = false;
         }
 
         return moving;

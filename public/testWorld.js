@@ -9,6 +9,7 @@ class TestWorld{
     this.saveWorld = true;
     this.showWorld = false;
     this.sW = true;
+    this.pacTrace = [];
   };
 
   addWall(wallType, size){
@@ -31,43 +32,20 @@ class TestWorld{
       }
     }
     if(!test){
-
       drawWall.x = this.snap(mouseX , size.w);
       drawWall.y = this.snap(mouseY, size.h);
       wallType.push(drawWall);
     }
   }
   update(){
-    // if(testLib.keys().save && this.saveWorld){
-    //   this.saveWorld = false;
-    //   this.wallBranch = {
-    //     a:this.wall,
-    //     b:this.branch
-    //   };
-    //   //var myJSON = JSON.stringify(this.wallBranch);
-    //   //localStorage.setItem("testJSON", myJSON);
-    //   saveJSON(this.wallBranch, "world.json");
-    //   console.log(this.wallBranch);
-    // }
-    // if(testLib.keys().load && this.loadWorld){
-    //   //var text = require('world.json'); //(with path)
-    //   var obj = loadJSON("world.json");
-    //
-    //   this.wall = obj;
-    //   console.log(this.wall);
-    //
-    //   this.loadWorld = false;
-    // }
-    // if(!testLib.keys().load){
-    //   this.loadWorld = true;
-    // }
-    // if(!testLib.keys().save){
-    //   this.saveWorld = true;
-    // }
     if(mouseIsPressed && mouseButton === LEFT){
       if(testLib.keys().s){
         this.addWall(this.branch, {w:20, h:20});
-      }else{
+      }
+      if(testLib.keys().a){
+        this.addWall(this.pacTrace, {w:20, h:20});
+      }
+      else{
         this.addWall(this.wall, {w:this.w, h:this.h});
       }
     }
@@ -78,6 +56,7 @@ class TestWorld{
     if(this.showWorld){
       this.show(this.wall, color("lightBlue"));
       this.show(this.branch, color(255));
+      this.show(this.pacTrace, color("lightYellow"));
     }
     if(this.sW && testLib.keys().w){
       console.log("shoeing/hiding world");
@@ -88,6 +67,10 @@ class TestWorld{
       this.sW = true;
     }
     return {wall:this.wall,branch:this.branch};
+  }
+
+  updatePacTrace(pacman){
+
   }
 
   show(wallType, c){
