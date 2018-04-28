@@ -42,7 +42,7 @@ class TestWorld{
       if(testLib.keys().s){
         this.addWall(this.branch, {w:20, h:20});
       }
-      if(testLib.keys().a){
+      else if(testLib.keys().pt){
         this.addWall(this.pacTrace, {w:20, h:20});
       }
       else{
