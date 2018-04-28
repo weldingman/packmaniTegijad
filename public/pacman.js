@@ -23,38 +23,73 @@ class Pacman{
   }
 
   move(wall){
+    this.speedX = 0;
+
     if(testLib.keys().r){
-      this.dir = "right";
       this.speedX = this.speed;
-      this.checkWall(wall, "x");
-      //this.speedY = 0;
+      if(!this.checkWall(wall, "x")){
+          this.dir = "right";
+      }
+      else{
+          this.dir = this.moveDir("right");
+      }
     }
-    else if(testLib.keys().l){
-      this.dir = "left";
+
+    if(testLib.keys().l){
       this.speedX = -this.speed;
-      this.checkWall(wall, "x");
-      //this.speedY = 0;
+      if(!this.checkWall(wall, "x")){
+        this.dir = "left";
+      }
+      else{
+          this.dir = this.moveDir("left");
+      }
     }
-    else{
-      this.speedX = 0;
-    }
+
+    this.speedY = 0;
     if(testLib.keys().u){
-      this.dir = "up";
       this.speedY = -this.speed;
-      this.checkWall(wall, "y");
-      //this.speedX = 0;
+      if(!this.checkWall(wall, "y")){
+        this.dir = "up";
+      }
+      else{
+          this.dir = this.moveDir("up");
+      }
     }
-    else if(testLib.keys().d){
-      this.dir = "down";
+
+    if(testLib.keys().d){
       this.speedY = this.speed;
-      this.checkWall(wall, "y");
-      //this.speedX = 0;
-    }
-    else{
-      this.speedY = 0;
+      if(!this.checkWall(wall, "y")){
+        this.dir = "down";
+      }
+      else{
+          this.dir = this.moveDir("down");
+      }
     }
   }
-  
+
+  moveDir(exclude){
+    if(exclude != "down"){
+      if(testLib.keys().d){
+        return "down";
+      }
+    }
+    if(exclude != "up"){
+      if(testLib.keys().u){
+        return "up";
+      }
+    }
+    if(exclude != "left"){
+      if(testLib.keys().l){
+        return "left";
+      }
+    }
+    if(exclude != "right"){
+      if(testLib.keys().r){
+        return "right";
+      }
+    }
+  }
+
   checkWall(wall, xy){
     var moveAvailable = {
       l:true,
@@ -79,9 +114,10 @@ class Pacman{
         if(xy === "y"){
           this.speedY = 0;
         }
-        break;
+        return true;
       }
     }
+    return false;
   }
 
   getOffsetBound(pacPosition){
