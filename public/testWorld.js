@@ -1,5 +1,5 @@
 class TestWorld{
-  constructor(size, wall = [], branch = []){
+  constructor(size, wall = [], branch = [], pacTrace = []){
     this.wall = wall;
     this.branch = branch;
     this.w = size.w;
@@ -9,7 +9,7 @@ class TestWorld{
     this.saveWorld = true;
     this.showWorld = false;
     this.sW = true;
-    this.pacTrace = [];
+    this.pacTrace = pacTrace;
   };
 
   addWall(wallType, size, traceDir){
@@ -34,7 +34,7 @@ class TestWorld{
     }
     if(!test){
       drawWall.x = this.snap(mouseX , size.w);
-      drawWall.y = this.snap(mouseY, size.h);  
+      drawWall.y = this.snap(mouseY, size.h);
       wallType.push(drawWall);
     }
   }
@@ -78,7 +78,6 @@ class TestWorld{
     for(var i = 0; i < this.pacTrace.length; i++){
       if(testLib.rectRectCol(pacman, this.pacTrace[i])){
         this.pacTrace[i].pacDir = pacman.dir;
-        console.log(this.pacTrace[i].pacDir);
       }
     }
   }
