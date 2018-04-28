@@ -41,7 +41,7 @@ class TestWorld{
   }
 
   update(pacman){
-    updatePacTrace(pacman);
+    this.updatePacTrace(pacman);
 
     if(mouseIsPressed && mouseButton === LEFT){
       if(testLib.keys().s){
