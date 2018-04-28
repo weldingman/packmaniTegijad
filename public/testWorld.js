@@ -60,7 +60,7 @@ class TestWorld{
       this.show(this.pacTrace, color("red"));
     }
     if(this.sW && testLib.keys().w){
-      console.log("shwing/hiding world");
+      console.log("showing/hiding the world");
       this.showWorld = !this.showWorld;
       this.sW = false;
     }
