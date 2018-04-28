@@ -33,6 +33,7 @@ function setup() {
 function draw() {
 	background(bg);
 	frameRate(60);
+	document.getElementById("mytext").value = score;
 	var worldObj = world.update(pac);
   pac.update(worldObj.wall);
 	for(var i = 0; i < ghosts.length; i++){
