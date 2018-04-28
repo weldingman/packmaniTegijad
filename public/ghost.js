@@ -68,6 +68,7 @@ class Ghost{
   }
 
   checkWall(wall, xy, pac, trace){
+    console.log(trace);
     var moveAvailable = {
       l:true,
       r:true,
@@ -92,7 +93,7 @@ class Ghost{
         if(xy === "y"){
           this.speedY = 0;
         }
-        console.log(trace);
+
         var tempTrace = this.tracePacman(trace);
 
         if(tempTrace != null){
