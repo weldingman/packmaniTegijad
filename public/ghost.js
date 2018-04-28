@@ -92,6 +92,7 @@ class Ghost{
           this.speedY = 0;
         }
         var tempTrace = this.tracePacman(trace);
+        console.log(trace);
         if(tempTrace != null){
           this.u = false;
           this.d = false;
