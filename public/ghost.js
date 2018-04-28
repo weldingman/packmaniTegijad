@@ -112,6 +112,7 @@ class Ghost{
           if(tempTrace === "right"){
             this.r = true;
           }
+          break;
         }
         else{
           this.randMove(pac);
