@@ -12,7 +12,7 @@ class TestWorld{
     this.pacTrace = [];
   };
 
-  addWall(wallType, size){
+  addWall(wallType, size, traceDir){
     var test = false;
     var testWall = {
       x:mouseX,
@@ -25,6 +25,7 @@ class TestWorld{
       y:mouseY,
       w:size.w,
       h:size.h,
+      pacDir:traceDtir
     };
     for(var i = 0; i < wallType.length; i++){
       if(testLib.rectRectCol(testWall, wallType[i])){
@@ -34,19 +35,23 @@ class TestWorld{
     if(!test){
       drawWall.x = this.snap(mouseX , size.w);
       drawWall.y = this.snap(mouseY, size.h);
+      if(traceDir)
       wallType.push(drawWall);
     }
   }
-  update(){
+
+  update(pacman){
+    updatePacTrace(pacman);
+
     if(mouseIsPressed && mouseButton === LEFT){
       if(testLib.keys().s){
-        this.addWall(this.branch, {w:20, h:20});
+        this.addWall(this.branch, {w:20, h:20}, null);
       }
       else if(testLib.keys().pt){
-        this.addWall(this.pacTrace, {w:20, h:20});
+        this.addWall(this.pacTrace, {w:20, h:20}, "random");
       }
       else{
-        this.addWall(this.wall, {w:this.w, h:this.h});
+        this.addWall(this.wall, {w:this.w, h:this.h}, null);
       }
     }
     if(mouseIsPressed && mouseButton === RIGHT){
@@ -67,11 +72,16 @@ class TestWorld{
     if(!testLib.keys().w){
       this.sW = true;
     }
-    return {wall:this.wall,branch:this.branch};
+    return {wall:this.wall, branch:this.branch, pacTrace:this.pacTrace};
   }
 
   updatePacTrace(pacman){
-
+    for(var i = 0; i < this.pacTrace.length; i++){
+      if(testLib.rectRectCol(pacman, this.pacTrace[i])){
+        this.pacTrace[i].pacDir = pacman.dir;
+        console.log(this.pacTrace[i].pacDir);
+      }
+    }
   }
 
   show(wallType, c){
