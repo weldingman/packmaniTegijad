@@ -25,7 +25,7 @@ class TestWorld{
       y:mouseY,
       w:size.w,
       h:size.h,
-      pacDir:traceDtir
+      pacDir:traceDir
     };
     for(var i = 0; i < wallType.length; i++){
       if(testLib.rectRectCol(testWall, wallType[i])){
