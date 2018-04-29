@@ -16,10 +16,10 @@ var startMillis;
 
 function preload(){
 	preWorld = loadJSON("world2.json");
+	bg = loadImage("pngs/dreamWorld4.jpg");
 }
 
 function setup() {
-	bg = loadImage("pngs/dreamWorld4.jpg");
 	//var myCanvas = createCanvas(640, 480);
 	createCanvas(640, 480);
 	startMillis = millis();
