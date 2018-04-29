@@ -8,17 +8,37 @@ body {
   margin: 0;
   display: flex;
 
-  /* This centers our sketch horizontally. */
+  /* This centers our sketch horizontally.
   justify-content: center;
 
-  /* This centers our sketch vertically. */
+  This centers our sketch vertically.
   align-items: center;
+  */
+
 }
 
-input {
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
-    width: 80px;
+.grid div:nth-child(even){
+  background-color: red;
+}
+.grid div:nth-child(odd){
+  background-color: green;
+}
+
+/*#myContainer{
+    padding-top: 100px;
+    border: 10px solid black;
+    justify-content: right;
+    align-items: top;
+}*/
+input {
+    width: 120px;
     font-size: 30px;
     /*border: none;*/
+
     background: transparent;
 }
