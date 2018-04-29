@@ -12,12 +12,14 @@ class Pacman{
 
   update(wall){
     this.show();
-    this.move(wall);
     this.y += this.speedY;
     this.x += this.speedX;
+    this.move(wall);
   }
 
   show(){
+    strokeWeight(1);
+    stroke(0);
     fill("yellow");
     ellipse(this.x, this.y, this.w, this.h);
   }
@@ -103,6 +105,8 @@ class Pacman{
       d:true
     };
     var pacPos = {
+      // x:this.x - this.w / 2,
+      // y:this.y - this.h / 2,
       x:this.x - this.w / 2,
       y:this.y - this.h / 2,
       w:this.w,
