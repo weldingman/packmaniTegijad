@@ -16,7 +16,7 @@ class TestWorld{
 
   update(pacman){
     this.updatePacTrace(pacman);
-    this.pacmanEatFood(pacman);
+    var addPoints = this.pacmanEatFood(pacman);
     if(mouseIsPressed && mouseButton === LEFT){
       if(testLib.keys().s){
         this.addWall(this.branch, {w:20, h:20}, null);
@@ -50,11 +50,12 @@ class TestWorld{
     if(!testLib.keys().w){
       this.sW = true;
     }
-    return {wall:this.wall, branch:this.branch, pacTrace:this.pacTrace};
+    return {wall:this.wall, branch:this.branch, pacTrace:this.pacTrace, addPoints:addPoints};
   }
 
   showFood(food, c){
     for(var i = 0; i < food.length; i++){
+      noStroke();
       fill(c);
       ellipse(food[i].x + this.w / 2, food[i].y + this.h / 2, food[i].r, food[i].r);
     }
@@ -63,6 +64,7 @@ class TestWorld{
   show(wallType, c){
     //console.log(wallType);
     for(var i = 0; i < wallType.length; i++){
+      noStroke();
       fill(c);
       rect(wallType[i].x, wallType[i].y, wallType[i].w, wallType[i].h);
     }
@@ -141,8 +143,10 @@ class TestWorld{
       }
       if(testLib.rectRectCol(tempPacman, this.food[i])){
         this.food.splice(i,1);
+        return 50;
       }
     }
+    return 0;
   }
 
   // need to add branch deletion
