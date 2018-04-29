@@ -5,12 +5,12 @@ var world;
 var ghost;
 var ghost2;
 var ghosts = [];
-var numOfGhosts = 2;
+var numOfGhosts = 5;
 var saveWorld = true;
 var loadWorld = true;
 let preWorld;
 var bg;
-var score = 100;
+var score = 0;
 var teime = 0;
 var startMillis;
 
@@ -32,12 +32,11 @@ function setup() {
 	}
   world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch, preWorld.pacTrace, preWorld.food);
 	world.setPactraceRandom();
-	console.log(world);
 }
 
 function draw() {
 	background(bg);
-	frameRate(60);
+	frameRate(50);
 	var worldObj = world.update(pac);
 	score += worldObj.addPoints;
 	time = ((millis() - (startMillis)) / 1000).toFixed(1);
