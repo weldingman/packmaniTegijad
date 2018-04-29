@@ -32,9 +32,13 @@ class TestWorld{
       }
     }
     if(mouseIsPressed && mouseButton === RIGHT){
+      if(testLib.keys().food){
+        this.delfood();
+      }
       this.delWall(this.wall);
       this.delWall(this.branch);
       this.delWall(this.pacTrace);
+
     }
     this.showFood(this.food, color("yellow"));
     if(this.showWorld){
@@ -161,6 +165,21 @@ class TestWorld{
     for(var i = 0; i < wallType.length; i++){
       if(testLib.rectRectCol(testWall, wallType[i])){
         wallType.splice(i, 1);
+      }
+    }
+  }
+
+  delfood(){
+    var testWall = {
+      x:mouseX,
+      y:mouseY,
+      w:1,
+      h:1
+    };
+
+    for(var i = 0; i < this.food.length; i++){
+      if(testLib.rectRectCol(testWall, this.food[i])){
+        this.food.splice(i, 1);
       }
     }
   }
