@@ -59,7 +59,8 @@ class TestWorld{
 
   showFood(food, c){
     for(var i = 0; i < food.length; i++){
-      noStroke();
+      strokeWeight(1);
+      stroke(0);
       fill(c);
       ellipse(food[i].x + this.w / 2, food[i].y + this.h / 2, food[i].r, food[i].r);
     }
