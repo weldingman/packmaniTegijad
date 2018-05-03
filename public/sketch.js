@@ -75,10 +75,6 @@ function draw() {
 	background(bg);
 	frameRate(50);
 
-
-
-
-
 	var worldObj = world.update(pac);
 	score += worldObj.addPoints;
 	time = ((millis() - (startMillis)) / 1000).toFixed(1);
@@ -120,7 +116,7 @@ function draw() {
 		if(pac.followPath(path1)){
 			path1.splice(path1.length - 1, 1);
 		}
-		// drawPath(path1);
+		drawPath(path1);
 	}
 }
 
