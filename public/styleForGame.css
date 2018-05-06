@@ -1,0 +1,101 @@
+/* style.css */
+html {
+
+  background:url(pacman-background.png);
+  color: #fff;
+}
+
+body {
+  font-family: 'Do Hyeon', sans-serif;
+  font-weight: lighter;
+  /* This centers our sketch horizontally.
+  justify-content: center;
+
+  This centers our sketch vertically.
+
+  */
+  margin: 6% 10%;
+
+}
+
+
+#startButton {
+  position: absolute;
+  top: 40%;
+  left: 44.3%;
+  width: 10%;
+  height: 5%;
+}
+
+
+
+
+.starButtonForPacmanPage{
+  text-align: left;
+}
+
+.startButton{
+	text-align: center;
+  width: 100%;
+}
+
+.goBackToMainPage{
+	color:  #fff;
+  border: 5px solid #fff;
+	font-size: 30px;
+	padding: 10px 30px;
+  text-decoration: none;
+  transition: 0.2s all ease-in-out 0s;
+}
+
+.goBackToMainPage:hover {
+  color: yellow;
+  border: 5px solid yellow;
+  font-size: 30px;
+  padding: 10px 30px;
+  transition: 0.2s all ease-in-out 0s;
+}
+
+
+
+
+#pacmanTitle {
+  margin: 0 4%;
+  text-align: center;
+}
+
+
+/* Gamefield id on see */
+#defaultCanvas0 { 
+  padding: 1.5%;
+  background:yellow;
+  border-radius: 3%;
+  margin: 0 29%; 
+}
+
+/* .grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid div:nth-child(even){
+  background-color: red;
+}
+.grid div:nth-child(odd){
+  background-color: green;
+} */
+
+/* #myContainer{
+    padding-top: 100px;
+    border: 10px solid black;
+    justify-content: right;
+    align-items: top;
+} */
+
+/* input {
+    width: 120px;
+    font-size: 30px;
+
+
+    background: transparent;
+} */
