@@ -15,7 +15,7 @@ app.get('/public/:game', startGame);
 //app.use(express.static('public'));
 
 //app.use(express.static(__dirname + '/views'));
-app.use('/', express.static(path.join(__dirname, 'pacmani veebileht')))
+app.use('/', express.static(path.join(__dirname, 'pacWeb')))
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.get('/public', function(req, res){
