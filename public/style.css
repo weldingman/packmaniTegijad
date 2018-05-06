@@ -1,6 +1,6 @@
 /* style.css */
 
-html, body {
+/* html, body {
   height: 100%;
 }
 
@@ -15,7 +15,7 @@ body {
   align-items: center;
   */
 
-}
+/* }
 
 .grid{
   display: grid;
@@ -34,11 +34,11 @@ body {
     border: 10px solid black;
     justify-content: right;
     align-items: top;
-}*/
+}
 input {
     width: 120px;
     font-size: 30px;
-    /*border: none;*/
+    /*border: none;
 
     background: transparent;
-}
+}  */
