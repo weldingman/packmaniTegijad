@@ -11,13 +11,13 @@ class TestWorld{
     this.sW = true;
     this.pacTrace = pacTrace;
     this.food = food;
-  };
+  }
 
 
   update(pacman){
     this.updatePacTrace(pacman);
-    this.pacmanEatFood(pacman);
-    if(mouseIsPressed && mouseButton === LEFT){
+    var addPoints = this.pacmanEatFood(pacman);
+    if(mouseIsPressed && mouseButton === LEFT && this.showWorld){
       if(testLib.keys().s){
         this.addWall(this.branch, {w:20, h:20}, null);
       }
@@ -32,11 +32,15 @@ class TestWorld{
       }
     }
     if(mouseIsPressed && mouseButton === RIGHT){
+      if(testLib.keys().food){
+        this.delfood();
+      }
       this.delWall(this.wall);
       this.delWall(this.branch);
       this.delWall(this.pacTrace);
+
     }
-    this.showFood(this.food, color("yellow"));
+    // this.showFood(this.food, color("yellow"));
     if(this.showWorld){
       this.show(this.wall, color("lightBlue"));
       this.show(this.branch, color(255));
@@ -50,11 +54,17 @@ class TestWorld{
     if(!testLib.keys().w){
       this.sW = true;
     }
-    return {wall:this.wall, branch:this.branch, pacTrace:this.pacTrace};
+    return {wall:this.wall, branch:this.branch, pacTrace:this.pacTrace, addPoints:addPoints};
+  }
+
+  getWallPosIndex(){
+
   }
 
   showFood(food, c){
     for(var i = 0; i < food.length; i++){
+      strokeWeight(1);
+      stroke(0);
       fill(c);
       ellipse(food[i].x + this.w / 2, food[i].y + this.h / 2, food[i].r, food[i].r);
     }
@@ -63,6 +73,7 @@ class TestWorld{
   show(wallType, c){
     //console.log(wallType);
     for(var i = 0; i < wallType.length; i++){
+      noStroke();
       fill(c);
       rect(wallType[i].x, wallType[i].y, wallType[i].w, wallType[i].h);
     }
@@ -141,8 +152,10 @@ class TestWorld{
       }
       if(testLib.rectRectCol(tempPacman, this.food[i])){
         this.food.splice(i,1);
+        return 50;
       }
     }
+    return 0;
   }
 
   // need to add branch deletion
@@ -157,6 +170,21 @@ class TestWorld{
     for(var i = 0; i < wallType.length; i++){
       if(testLib.rectRectCol(testWall, wallType[i])){
         wallType.splice(i, 1);
+      }
+    }
+  }
+
+  delfood(){
+    var testWall = {
+      x:mouseX,
+      y:mouseY,
+      w:1,
+      h:1
+    };
+
+    for(var i = 0; i < this.food.length; i++){
+      if(testLib.rectRectCol(testWall, this.food[i])){
+        this.food.splice(i, 1);
       }
     }
   }

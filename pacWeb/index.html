@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Responsive Sticky Navbar</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+      <div class="wrapper">
+            <header>
+
+                  <nav>
+
+                        <div class="menu-icon">
+                              <i class="fa fa-bars fa-2x"></i>
+                        </div>
+
+                        <div class="logo">
+                              <img src="valmisLogo3.png" />
+                        </div>
+
+                        <div class="menu">
+                              <ul class="menu_clicks">
+                                    <li>
+                                          <a href="#">Home</a>
+                                    </li>
+                                    <li>
+                                          <a target="_blank" href="https://en.wikipedia.org/wiki/Pac-Man">Pacman</a>
+                                    </li>
+                              </ul>
+                        </div>
+                  </nav>
+
+                  <div class="startButton">
+
+                        <div class="starButtonForPacmanPage">
+                              <a href="/static" class="call-button">Go to Game</a>
+                        </div>
+                  </div>
+
+
+      </header>
+
+
+
+      <div class="content">
+            <p>
+                  PACMAN! 
+                  <br>
+                  Tere tulemast Pacmani mängu mängima. 
+                  Läbige labürint kogudes punkte ja põgenege kummituste eest. 
+                  Mängu eesmärk on "süüa" ära kõik punktid mänguväljal. 
+                  Kui kummitus tabab Pacman'i siis kaotad elu.  
+                  Kui kõik elu on otsa saanud on mäng lõppenud. 
+                  Kasutage liikumiseks nooleklahve.
+                  <br>
+                  <br>
+                  1TAR(e)g: Erika Hendsel; Sven Suiste; Ingrid Ojasoo; Kristi Kuuspalu.    
+                                                <br><i>Tallinna Tööstushariduskeskus</i> 
+            </p>
+      </div>
+      </div>
+
+      <script type="text/javascript">
+
+            // Menu-toggle button
+
+            $(document).ready(function () {
+                  $(".menu-icon").on("click", function () {
+                        $("nav ul").toggleClass("showing");
+                  });
+            });
+
+            // Scrolling Effect
+
+            $(window).on("scroll", function () {
+                  if ($(window).scrollTop()) {
+                        $('nav').addClass('black');
+                  }
+
+                  else {
+                        $('nav').removeClass('black');
+                  }
+            })
+
+
+      </script>
+
+</body>
+
+</html>
