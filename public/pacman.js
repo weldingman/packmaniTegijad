@@ -56,7 +56,6 @@ class Pacman{
         }
         if(path[path.length - 2].i < pos.i){
           this.l = true;
-          console.log(path[path.length - 2]);
         }
         if(path[path.length - 2].j > pos.j){
           this.d = true;;
@@ -135,7 +134,7 @@ class Pacman{
     // if(this.x - dirX > 0 && this.x - dirY > 0){
       var i = snap(this.x - 7 * dirX, this.w) / this.w;
       var j = snap(this.y - 7 * dirY, this.h) / this.h;
-      console.log(i);
+      // console.log(i);
       return {i:i, j:j};
     // }
     // return {};

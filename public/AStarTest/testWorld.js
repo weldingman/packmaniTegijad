@@ -40,7 +40,7 @@ class TestWorld{
       this.delWall(this.pacTrace);
 
     }
-    // this.showFood(this.food, color("yellow"));
+    this.showFood(this.food, color("yellow"));
     if(this.showWorld){
       this.show(this.wall, color("lightBlue"));
       this.show(this.branch, color(255));

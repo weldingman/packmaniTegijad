@@ -23,6 +23,7 @@ var walls = [];
 var wall = [];
 var mc = false;
 var path1 = [];
+var path2 = [];
 
 function preload(){
 	preWorld = loadJSON("worldClear.json");
@@ -40,23 +41,19 @@ function setup() {
   //canvasElt.style.width = '260px', canvasElt.style.height = "200px";
   pac = new Pacman({x:30, y:30}, {w:20, h:20}, 2.5, "up");
 	for(var i = 0; i < numOfGhosts; i++){
-		ghosts.push(new Ghost({x:280, y:190}, {w:20, h:20}, 2, "up"));
+		ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up"));
 	}
   world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch, preWorld.pacTrace, preWorld.food);
-
 	walls = transWall(world.wall);
-	// console.log(wall.length);
 	aStar = new AStar(cols, rows, dim, walls);
-	// console.log(aStar.grid);
+
   if(preloadWall){
     for(var i = 0; i < walls.length; i++){
       var temp = aStar.grid.getNode(walls[i].i, walls[i].j);
       wallToSave.push({i:walls[i].i, j:walls[i].j});
       wall.push(temp);
-      //aStar.addWall(temp);
     }
 		aStar.updateWall();
-		// console.log(aStar.wall);
   }
 	world.setPactraceRandom();
 }
@@ -85,13 +82,14 @@ function draw() {
 	textStyle(BOLD);
 	text("score: " + score, 150, 65);
 	text("time: " + time, 410, 65);
+
   pac.update(worldObj.wall);
+
 	for(var i = 0; i < ghosts.length; i++){
 		if(ghosts[i].update(worldObj, pac)){
 			restartWorld();
 		}
 	}
-
 	if(mouseIsPressed && mc){
     mc = false;
 		var wallCheck = false;
@@ -110,19 +108,33 @@ function draw() {
 			path1 = aStar.calcPath();
 		}
   }
+
+	var ghostPos = ghosts[0].getPos(0,0);
+	var pacPos = pac.getPos(0,0);
+	aStar.targetUpdate({i:ghostPos.i,j:ghostPos.j}, {i:pacPos.i, j:pacPos.j});
+	path2 = aStar.calcPath();
+
 	//document.getElementById("mytext").value = score;
 	lS();
+
+
 	if(path1.length > 0){
 		if(pac.followPath(path1)){
 			path1.splice(path1.length - 1, 1);
 		}
-		drawPath(path1);
+		drawPath(path1, "red");
+	}
+	if(path2.length > 0){
+		if(ghosts[0].followPath(path2)){
+			path2.splice(path2.length - 1, 1);
+		}
+		drawPath(path2, "blue");
 	}
 }
 
-function drawPath(path){
-	strokeWeight(5);
-	stroke("red");
+function drawPath(path, col){
+	strokeWeight(3);
+	stroke(col);
 	for(var i = 0; i < path.length - 2; i++){
 		var x1 = path[i].i * dim + dim / 2;
 		var y1 = path[i].j * dim + dim / 2;

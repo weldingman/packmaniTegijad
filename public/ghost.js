@@ -10,9 +10,11 @@ class Ghost{
     this.dir = dir;
     this.u = false;
     this.d = false;
-    this.r = true;
+    this.r = false;
     this.l = false;
     this.branchFlag = -1;
+    this.dirX = 0;
+    this.dirY = 0;
   }
 
   update(world, pac){
@@ -37,14 +39,14 @@ class Ghost{
       this.dir = "right";
       this.speedX = this.speed;
       this.checkWall(wall.wall, "x", pac, wall.pacTrace);
-      this.checkBranch(wall.branch, pac, wall.pacTrace);
+      // this.checkBranch(wall.branch, pac, wall.pacTrace);
       //this.speedY = 0;
     }
     else if(this.l){
       this.dir = "left";
       this.speedX = -this.speed;
       this.checkWall(wall.wall, "x", pac, wall.pacTrace);
-      this.checkBranch(wall.branch, pac, wall.pacTrace);
+      // this.checkBranch(wall.branch, pac, wall.pacTrace);
       //this.speedY = 0;
     }
     else{
@@ -54,19 +56,118 @@ class Ghost{
       this.dir = "up";
       this.speedY = -this.speed;
       this.checkWall(wall.wall, "y", pac, wall.pacTrace);
-      this.checkBranch(wall.branch, pac, wall.pacTrace);
+      // this.checkBranch(wall.branch, pac, wall.pacTrace);
       //this.speedX = 0;
     }
     else if(this.d){
       this.dir = "down";
       this.speedY = this.speed;
       this.checkWall(wall.wall, "y", pac, wall.pacTrace);
-      this.checkBranch(wall.branch, pac, wall.pacTrace);
+      // this.checkBranch(wall.branch, pac, wall.pacTrace);
       //this.speedX = 0;
     }
     else{
       this.speedY = 0;
     }
+  }
+
+  followPath(path){
+
+    var p = this.setPos(path[path.length - 2]);
+    var pos = this.getPos(this.dirX, this.dirY);
+    // console.log(path[path.length - 2]);
+    if(path.length > 1){
+
+      if(path[path.length - 2].i > pos.i){
+        this.dir = "right";
+        console.log("left");
+      }
+      if(path[path.length - 2].i < pos.i){
+        // this.dirX = 1;
+        this.dir = "left";
+        console.log("left");
+      }
+      if(path[path.length - 2].j > pos.j){
+        this.dir = "down";
+        console.log("down");
+      }
+      if(path[path.length - 2].j < pos.j){
+        // this.dirX = 1;
+        this.dir = "up";
+        console.log(pos);
+         console.log(path);
+      }
+      // if(this.dir === "up"){
+      //   // this.dirY = -1;
+      //   this.dirY = -1;
+      // }
+      // if(this.dir === "down"){
+      //   // this.dirY = 1;
+      //   this.dirY = 1;
+      // }
+      // console.log(this.dirX);
+
+
+        if(this.dir === "left"){
+          // this.dirX = -1;
+          this.dirX = 1;
+        }
+        if(this.dir === "right"){
+          // this.dirX = 1;
+          this.dirX = -1;
+        }
+        if(this.dir === "up"){
+          // this.dirY = -1;
+          this.dirY = -1;
+        }
+        if(this.dir === "down"){
+          // this.dirY = 1;
+          this.dirY = 1;
+        }
+
+        p = this.setPos(path[path.length - 2]);
+        pos = this.getPos(this.dirX, this.dirY);
+
+
+        if(this.dir === "left"){
+          // this.dirX = -1;
+          this.l = true;
+        }
+        if(this.dir === "right"){
+          // this.dirX = 1;
+          this.r = true;
+        }
+        if(this.dir === "up"){
+          // this.dirY = -1;
+          this.u = true;
+        }
+        if(this.dir === "down"){
+          // this.dirY = 1;
+          this.d = true;
+        }
+        // if(path[path.length - 2].i > pos.i){
+        //   this.r = true;
+        // }
+        // if(path[path.length - 2].i < pos.i){
+        //   this.l = true;
+        // }
+        // if(path[path.length - 2].j > pos.j){
+        //   this.d = true;
+        // }
+        // if(path[path.length - 2].j < pos.j){
+        //   this.u = true;
+        // }
+
+      if(path[path.length - 2].i === pos.i && path[path.length - 2].j === pos.j){
+
+           this.r = false;
+           this.l = false;
+           this.u = false;
+           this.d = false;
+           return true;
+      }
+    }
+    return false;
   }
 
   checkWall(wall, xy, pac, trace){
@@ -95,36 +196,36 @@ class Ghost{
           this.speedY = 0;
         }
 
-        var tempTrace = this.tracePacman(trace);
-        //console.log(tempTrace);
-
-        if(tempTrace != null){
-          this.u = false;
-          this.d = false;
-          this.r = false;
-          this.l = false;
-          if(tempTrace === "up"){
-            this.u = true;
-          }
-          if(tempTrace === "down"){
-            this.d = true;
-          }
-          if(tempTrace === "left"){
-            this.l = true;
-          }
-          if(tempTrace === "right"){
-            this.r = true;
-          }
-          break;
-        }
-        else{
-          this.randMove(pac);
-        }
-        break;
-      }
+      //   var tempTrace = this.tracePacman(trace);
+      //   //console.log(tempTrace);
+      //
+      //   if(tempTrace != null){
+      //     this.u = false;
+      //     this.d = false;
+      //     this.r = false;
+      //     this.l = false;
+      //     if(tempTrace === "up"){
+      //       this.u = true;
+      //     }
+      //     if(tempTrace === "down"){
+      //       this.d = true;
+      //     }
+      //     if(tempTrace === "left"){
+      //       this.l = true;
+      //     }
+      //     if(tempTrace === "right"){
+      //       this.r = true;
+      //     }
+      //     break;
+      //   }
+      //   else{
+      //     this.randMove(pac);
+      //   }
+      //   break;
+      // }
     }
   }
-
+}
   checkBranch(wall, pac, trace){
     var moveAvailable = {
       l:true,
@@ -181,6 +282,23 @@ class Ghost{
   getPac(pacman){
     return testLib.rectRectCol(this, pacman);
   }
+
+  setPos(pos){
+    var x = pos.i * this.w;
+    var y = pos.j * this.h;
+    return ({x:x, y:y, w:this.w, h:this.h});
+  }
+
+  getPos(dirX, dirY){
+    // if(this.x - dirX > 0 && this.x - dirY > 0){
+      var i = snap(this.x - 7 * dirX, this.w) / this.w;
+      var j = snap(this.y - 7 * dirY, this.h) / this.h;
+      // console.log(i);
+      return {i:i, j:j};
+    // }
+    // return {};
+  }
+
   getOffsetBound(pacPosition){
     var offRect = {
       x:pacPosition.x + this.speedX,
