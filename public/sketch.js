@@ -42,7 +42,7 @@ var lives = 3;
 var lost = false;
 
 function preload(){
-	preWorld = loadJSON("world2.json");
+	preWorld = loadJSON("world3.json");
 	ghost1 = loadImage('pngs/Pacman/Kollid/koll1.png');
 	ghost2 = loadImage('pngs/Pacman/Kollid/koll2.png');
 	ghost3 = loadImage('pngs/Pacman/Kollid/koll3.png');
