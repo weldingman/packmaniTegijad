@@ -1,8 +1,19 @@
 // test heoku
 var pac;
 var world;
-var ghost;
+var ghost1;
 var ghost2;
+var ghost3;
+var ghost4;
+var ghost5;
+var pac1U;
+var pac1D;
+var pac1L;
+var pac1R;
+var pac2U;
+var pac2D;
+var pac2L;
+var pac2R;
 var ghosts = [];
 var numOfGhosts = 1;
 var saveWorld = true;
@@ -24,9 +35,27 @@ var wall = [];
 var mc = false;
 var path1 = [];
 var path2 = [];
+var restart = true;
+var restartTime = 0;
+var win = false;
+var lives = 3;
+var lost = false;
 
 function preload(){
-	preWorld = loadJSON("worldClear.json");
+	preWorld = loadJSON("world2.json");
+	ghost1 = loadImage('pngs/Pacman/Kollid/koll1.png');
+	ghost2 = loadImage('pngs/Pacman/Kollid/koll2.png');
+	ghost3 = loadImage('pngs/Pacman/Kollid/koll3.png');
+	ghost4 = loadImage('pngs/Pacman/Kollid/koll4.png');
+	ghost5 = loadImage('pngs/Pacman/Kollid/koll5.png');
+	pac1U = loadImage('pngs/Pacman/pacman1U.png');
+	pac1D = loadImage('pngs/Pacman/pacman1D.png');
+	pac1L = loadImage('pngs/Pacman/pacman1L.png');
+	pac1R= loadImage('pngs/Pacman/pacman1R.png');
+	pac2U = loadImage('pngs/Pacman/pacman2U.png');
+	pac2D = loadImage('pngs/Pacman/pacman2D.png');
+	pac2L = loadImage('pngs/Pacman/pacman2L.png');
+	pac2R= loadImage('pngs/Pacman/pacman2R.png');
 	bg = loadImage("pngs/dreamWorld4.jpg");
 }
 
@@ -39,10 +68,14 @@ function setup() {
 	//myCanvas.parent('myContainer');
 	//const canvasElt = createCanvas(640, 480).elt;
   //canvasElt.style.width = '260px', canvasElt.style.height = "200px";
-  pac = new Pacman({x:30, y:30}, {w:20, h:20}, 2.5, "up");
-	for(var i = 0; i < numOfGhosts; i++){
-		ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up"));
-	}
+  pac = new Pacman({x:30, y:30}, {w:20, h:20}, 2.5, "up", {u1:pac1U, d1:pac1D, l1:pac1L, r1:pac1R, u2:pac2U, d2:pac2D, l2:pac2L, r2:pac2R});
+
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up", ghost1));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up", ghost2));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up", ghost3));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up", ghost4));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up", ghost5));
+
   world = new TestWorld({w:20,h:20}, preWorld.wall, preWorld.branch, preWorld.pacTrace, preWorld.food);
 	walls = transWall(world.wall);
 	aStar = new AStar(cols, rows, dim, walls);
@@ -71,65 +104,85 @@ function transWall(wallIn){
 function draw() {
 	background(bg);
 	frameRate(50);
-
-	var worldObj = world.update(pac);
-	score += worldObj.addPoints;
-	time = ((millis() - (startMillis)) / 1000).toFixed(1);
-	strokeWeight(4);
-	stroke(51);
-	fill("yellow");
-	textSize(20);
-	textStyle(BOLD);
-	text("score: " + score, 150, 65);
-	text("time: " + time, 410, 65);
-
-  pac.update(worldObj.wall);
-
-	for(var i = 0; i < ghosts.length; i++){
-		if(ghosts[i].update(worldObj, pac)){
-			restartWorld();
-		}
+	if(win){
+		stroke("red");
+		textSize(60);
+		fill("yellow");
+		text("YOU WIN THE GAME!",20,210);
 	}
-	if(mouseIsPressed && mc){
-    mc = false;
-		var wallCheck = false;
-    var i = snap(mouseX, dim) / dim;
-    var j = snap(mouseY, dim) / dim;
-		console.log(walls[0]);
-		for(var k = 0; k < walls.length; k++){
-			if(walls[k].i === i && walls[k].j === j){
-				console.log(i + " " + j);
-				wallCheck = true;
+	else{
+		if(lost){
+			stroke("red");
+			textSize(50);
+			fill("yellow");
+			text("YOU LOST THE GAME!",50,210);
+		}
+		else{
+			if(restart){
+				if(restartTime + 3000 < millis()){
+					restart = false;
+				}
+				textSize(50);
+				fill("yellow");
+				text("READY!",220,210);
+			}
+			else{
+
+				var worldObj = world.update(pac);
+				score += worldObj.addPoints;
+				time = ((millis() - (startMillis)) / 1000).toFixed(1);
+				strokeWeight(4);
+				stroke(51);
+				fill("yellow");
+				textSize(20);
+				textStyle(BOLD);
+				text("score: " + score, 150, 65);
+				text("time: " + time, 410, 65);
+				if(score === 16250){
+					win = true;
+				}
+			  pac.update(worldObj.wall);
+
+				for(var i = 0; i < ghosts.length; i++){
+					if(ghosts[i].update(worldObj, pac)){
+						lives -= 1;
+						if(lives === 0){
+							lost = true;
+						}
+						else{
+							restartWorld();
+						}
+					}
+				}
+				if(mouseIsPressed && mc){
+			    mc = false;
+					var wallCheck = false;
+			    var i = snap(mouseX, dim) / dim;
+			    var j = snap(mouseY, dim) / dim;
+					console.log(walls[0]);
+					for(var k = 0; k < walls.length; k++){
+						if(walls[k].i === i && walls[k].j === j){
+							console.log(i + " " + j);
+							wallCheck = true;
+						}
+					}
+					if(!wallCheck){
+						var pacPos = pac.getPos(0,0);
+						aStar.targetUpdate({i:pacPos.i,j:pacPos.j}, {i:i, j:j});
+						path1 = aStar.calcPath();
+					}
+			  }
+
+				lS();
+				if(path1.length > 0){
+					if(pac.followPath(path1)){
+						path1.splice(path1.length - 1, 1);
+					}
+					drawPath(path1, "red");
+				}
 			}
 		}
-		if(!wallCheck){
-			var pacPos = pac.getPos(0,0);
-			aStar.targetUpdate({i:pacPos.i,j:pacPos.j}, {i:i, j:j});
-			path1 = aStar.calcPath();
 		}
-  }
-
-	var ghostPos = ghosts[0].getPos(0,0);
-	var pacPos = pac.getPos(0,0);
-	aStar.targetUpdate({i:ghostPos.i,j:ghostPos.j}, {i:pacPos.i, j:pacPos.j});
-	path2 = aStar.calcPath();
-
-	//document.getElementById("mytext").value = score;
-	lS();
-
-
-	if(path1.length > 0){
-		if(pac.followPath(path1)){
-			path1.splice(path1.length - 1, 1);
-		}
-		drawPath(path1, "red");
-	}
-	if(path2.length > 0){
-		if(ghosts[0].followPath(path2)){
-			path2.splice(path2.length - 1, 1);
-		}
-		drawPath(path2, "blue");
-	}
 }
 
 function drawPath(path, col){
@@ -146,11 +199,15 @@ function drawPath(path, col){
 
 function restartWorld(){
 	world.setPactraceRandom();
-	pac = new Pacman({x:30, y:30}, {w:20, h:20}, 2.5, "up");
+	pac = new Pacman({x:30, y:30}, {w:20, h:20}, 2.5, "up", {u1:pac1U, d1:pac1D, l1:pac1L, r1:pac1R, u2:pac2U, d2:pac2D, l2:pac2L, r2:pac2R});
 	ghosts = [];
-	for(var i = 0; i < numOfGhosts; i++){
-		ghosts.push(new Ghost({x:280, y:190}, {w:20, h:20}, 2, "up"));
-	}
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up", ghost1));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "down", ghost2));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "left", ghost3));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "right", ghost4));
+	ghosts.push(new Ghost({x:290, y:190}, {w:20, h:20}, 2, "up", ghost5));
+	restart = true;
+	restartTime = millis();
 }
 
 function lS(){

@@ -2730,6 +2730,34 @@
       "w": 20,
       "h": 20,
       "pacDir": null
+    },
+    {
+      "x": 180,
+      "y": 340,
+      "w": 20,
+      "h": 20,
+      "pacDir": null
+    },
+    {
+      "x": 200,
+      "y": 340,
+      "w": 20,
+      "h": 20,
+      "pacDir": null
+    },
+    {
+      "x": 220,
+      "y": 340,
+      "w": 20,
+      "h": 20,
+      "pacDir": null
+    },
+    {
+      "x": 240,
+      "y": 340,
+      "w": 20,
+      "h": 20,
+      "pacDir": null
     }
   ],
   "branch": [
@@ -3152,7 +3180,7 @@
   "wallBranch": [],
   "loadWorld": true,
   "saveWorld": true,
-  "showWorld": false,
+  "showWorld": true,
   "sW": true,
   "pacTrace": [
     {

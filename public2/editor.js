@@ -7,27 +7,6 @@ class Editor{
     this.reference = [];
   }
 
-  createReference(){
-    for(var i = 0; i < this.cols; i++){
-      for(var j = 0; j < this.rows; j++){
-        var temp = new Block(i * this.dim + this.dim / 2, j * this.dim + this.dim / 2, "free", "lightBlue");
-        this.reference.push(temp);
-      }
-    }
-  }
-
-  drawRef(){
-    for(var k = 0; k < this.reference.length; k++){
-      var x = this.reference[k].i;
-      var y = this.reference[k].j;
-      noFill();
-      stroke("red");
-      ellipse(x, y, 6, 6);
-      rect(x, y, this.dim, this.dim);
-      stroke("black");
-    }
-  }
-
   createEmptyGrid(){
     for(var i = 0; i < this.cols; i++){
       for(var j = 0; j < this.rows; j++){
@@ -39,10 +18,6 @@ class Editor{
 
   addGridElements(arr,type, col){
     for(var k = 0; k < arr.length; k++){
-      if(k === 0 && type === "path"){
-        col = "purple";
-        console.log(col);
-      }
       var temp = new Block(arr[k].i, arr[k].j, type, col);
       this.grid[this.getIndex(arr[k].i,arr[k].j)] = temp;
     }
@@ -73,6 +48,33 @@ class Editor{
         this.grid[index].col = "lightYellow";
       }
     }
+  }
+  getWallIJ(){
+    var temp = [];
+    for(var i = 0; i < grid.length; i++){
+      if(this.grid[i].type === "wall"){
+        temp.push({i:this.grid[i].i, j:this.grid[i].j});
+      }
+    }
+    return temp;
+  }
+
+  isWall(i, j){
+    var index = this.getIndex(i, j);
+    if(this.grid[index].type === "wall"){
+      return true;
+    }
+    return false;
+  }
+
+  getWall(){
+    var temp = [];
+    for(var i = 0; i < grid.length; i++){
+      if(this.grid[i].type === "wall"){
+        temp.push(this.grid[i]);
+      }
+    }
+    return temp;
   }
 
   drawWorld(){

@@ -5,7 +5,7 @@ class Pacman{
     this.x = i * dim;
     this.y = j * dim;
     this.dim = dim;
-    this.speed = 1;
+    this.speed = 2;
     this.rows = rows;
     this.cols = cols;
     this.moveUp = false;
@@ -18,6 +18,7 @@ class Pacman{
     this.arrived = false;
     this.lockPos = true;
     this.arrivedArr = [];
+    this.pathNeighbor;
   }
 
   moveTo(iIn, jIn){
@@ -38,19 +39,29 @@ class Pacman{
     }
     return -1;
   }
+  setPos(i,j){
+    this.i = i;
+    this.j = j;
+  }
+  getPosXY(){
+    return {x:this.x, y:this.y};
+  }
 
-  move(grid, path, end){
+  getSetIJ(){
+    return {i:this.setI, j:this.setJ};
+  }
+
+  move(grid, path){
     var i = testLib.snap(this.x, this.dim) / this.dim;
     var j = testLib.snap(this.y, this.dim) / this.dim;
 
-    if(this.setI != this.i && this.setJ != this.j && this.setJ != end.j){
-      if(this.moveTo(this.setI , this.setJ)){
-        var index = this.getIndex(this.i, this.j);
-        grid[index].setType("arrived", "red");
-        this.arrivedArr.push(grid[index]);
-        console.log(this.arrivedArr);
-        this.arrived = true;
-      }
+
+    if(this.moveTo(this.setI , this.setJ)){
+      var index = this.getIndex(this.i, this.j);
+      grid[index].setType("arrived", "red");
+      // this.arrivedArr.push(grid[index]);
+      // console.log(this.arrivedArr);
+      this.arrived = true;
     }
 
     if(this.i - 2 === testLib.snap(this.x - 1, this.dim) / this.dim){
@@ -87,6 +98,7 @@ class Pacman{
             this.setI = neighbors[k].i;
             this.setJ = this.j;
             console.log("right");
+            this.pathNeighbor = neighbors[k];
           }
         }
         else{
@@ -104,6 +116,7 @@ class Pacman{
             this.setI = neighbors[k].i;
             this.setJ = this.j;
             console.log(j);
+            this.pathNeighbor = neighbors[k];
           }
         }
         else{
@@ -120,6 +133,7 @@ class Pacman{
             this.setI = this.i;
             this.setJ = neighbors[k].j;
             console.log("set J at: " + (neighbors[k].j));
+            this.pathNeighbor = neighbors[k];
           }
         }
         else{
@@ -135,6 +149,7 @@ class Pacman{
             this.arrived = false;
             this.setI = this.i;
             this.setJ = neighbors[k].j;
+            this.pathNeighbor = neighbors[k];
             // console.log(j);
           }
         }
@@ -144,135 +159,6 @@ class Pacman{
       }
     }
 
-      // if(neighbors[k].j != j / dim + 1 && neighbors[k].i === i / dim){
-      //   j = testLib.snap(this.y + this.dim / 2 - this.speed, this.dim);
-      //   neighbors = this.getNeighbors(i / dim, j / dim, grid);
-      //   if(neighbors[k].j != j / dim + 1 && neighbors[k].i === i / dim){
-      //     if(neighbors[k].type === "wall"){
-      //       up = false;
-      //       fill("red");
-      //     }
-      //     if(neighbors[k].type === "path"){
-      //       fill("orange");
-      //       // this.moveUp = true;
-      //     }
-      //   }
-      // }
-      //
-      // if(neighbors[k].j != j / dim - 1 && neighbors[k].i === i / dim){
-      //   j = testLib.snap(this.y - this.dim / 2 + this.speed - 1, this.dim);
-      //   neighbors = this.getNeighbors(i / dim, j / dim, grid);
-      //   if(neighbors[k].j != j / dim - 1 && neighbors[k].i === i / dim){
-      //     if(neighbors[k].type === "wall"){
-      //       down = false;
-      //       fill("red");
-      //     }
-      //     if(neighbors[k].type === "path"){
-      //       fill("orange");
-      //       // this.moveDown = true;
-      //     }
-      //
-      //   }
-      // }
-      //
-      //   if(neighbors[k].i != i / dim + 1 && neighbors[k].j === j / dim){
-      //     i = testLib.snap(this.x + this.dim / 2 - this.speed, this.dim);
-      //     neighbors = this.getNeighbors(i / dim, j / dim, grid);
-      //     if(neighbors[k].i != i / dim + 1 && neighbors[k].j === j / dim){
-      //       if(neighbors[k].type === "wall"){
-      //         left = false;
-      //         fill("red");
-      //       }
-      //       if(neighbors[k].type === "path"){
-      //         fill("orange");
-      //         // this.moveLeft = true;
-      //       }
-      //
-      //       // if(j / dim === path[path.length - 1].j && neighbors[k].i + 1 === path[path.length - 1].i){
-      //       //     console.log(this.getIndex(i / dim, j / dim));
-      //       //     grid[this.getIndex(i / dim, j / dim)].setType("free", "yellow");
-      //       //     path.splice(path.length - 1, 1);
-      //       //   }
-      //     }
-      //   }
-      //
-      //   if(neighbors[k].i != i / dim - 1 && neighbors[k].j === j / dim){
-      //     // console.log(neighbors[k].i);
-      //     i = testLib.snap(this.x - this.dim / 2 + this.speed - 1, this.dim);
-      //     j = testLib.snap(this.y, this.dim);
-      //     neighbors = this.getNeighbors(i / dim, j / dim, grid);
-      //     if(neighbors[k].i != i / dim - 1 && neighbors[k].j === j / dim){
-      //       if(neighbors[k].type === "wall"){
-      //         right = false;
-      //         fill("red");
-      //       }
-      //       if(neighbors[k].type === "path"){
-      //         fill("orange");
-      //         // this.moveRight = true;
-      //       }
-      //     }
-      //   }
-      //
-      //
-      //   // console.log(testI + " " + path[path.length - 1].i + " " + testJ + " " + path[path.length - 1].j);
-      //   // if((testI === path[path.length - 2].i
-      //   //  && testJ === path[path.length - 2].j )|| (testI === path[path.length - 1].i
-      //   //   && testJ === path[path.length - 1].j)){
-      //     // fill("green");
-      //     // grid[this.getIndex(path[path.length - 1].i, path[path.length - 1].j)].setType("free", "yellow");
-      //     // //grid[this.getIndex(path[path.length - 2].i, path[path.length - 2].j)].setType("free", "yellow");
-      //     // path.splice(path.length - 1, 1);
-      //     // console.log(testLib.snap(this.x - dim / 2, this.dim) / dim + " " + testLib.snap(this.y - dim / 2, this.dim) / dim);
-      //     // if(this.aRight){
-      //     //   this.aRight = false;
-      //     // }
-      //     // if(this.aLeft){
-      //     //   this.aLeft = false;
-      //     // }
-      //     // if(this.aUp){
-      //     //   this.aUp = false;
-      //     // }
-      //     // if(this.aDown){
-      //     //   this.aDown = false;
-      //     // }
-      //   //   this.moveRight = false;
-      //   //   this.moveDown = false;
-      //   //   this.moveLeft = false;
-      //   //   this.moveUp = false;
-      //   // }
-      //
-      //
-      // // if(neighbors[k].j != j / dim - 1 && neighbors[k].i === i / dim && neighbors[k].type === "wall"){
-      // //   j = testLib.snap(this.y - this.dim / 2 + this.speed - 1, this.dim);
-      // //   // console.log("wall");
-      // //   neighbors = this.getNeighbors(i / dim, j / dim, grid);
-      // //   if(neighbors[k].j != j / dim - 1 && neighbors[k].i === i / dim && neighbors[k].type === "wall"){
-      // //
-      // //     down = false;
-      // //     fill("red");
-      // //   }
-      // // }
-      // //
-      // //   if(neighbors[k].i != i / dim + 1 && neighbors[k].j === j / dim && neighbors[k].type === "wall"){
-      // //     i = testLib.snap(this.x + this.dim / 2 - this.speed, this.dim);
-      // //     neighbors = this.getNeighbors(i / dim, j / dim, grid);
-      // //     if(neighbors[k].i != i / dim + 1 && neighbors[k].j === j / dim && neighbors[k].type === "wall"){
-      // //       left = false;
-      // //       fill("red");
-      // //     }
-      // //   }
-      // //
-      // //   if(neighbors[k].i != i / dim - 1 && neighbors[k].j === j / dim && neighbors[k].type === "wall"){
-      // //     // console.log(neighbors[k].i);
-      // //     i = testLib.snap(this.x - this.dim / 2 + this.speed - 1, this.dim);
-      // //     neighbors = this.getNeighbors(i / dim, j / dim, grid);
-      // //     if(neighbors[k].i != i / dim - 1 && neighbors[k].j === j / dim && neighbors[k].type === "wall"){
-      // //       right = false;
-      // //       fill("red");
-      // //     }
-      // //   }
-    //   rect(neighbors[k].i * this.dim, neighbors[k].j * this.dim, this.dim, this.dim);
-    // }
       if(i  === this.x / dim){
         if(testLib.keys().u || this.moveUp){
           this.y -= this.speed;
@@ -288,6 +174,11 @@ class Pacman{
         if(testLib.keys().r || this.moveRight){
           this.x += this.speed;
         }
+      }
+      //console.log(pathNeighbor);
+      if(this.pathNeighbor){
+        fill("red");
+        rect(this.pathNeighbor.i * this.dim, this.pathNeighbor.j * this.dim, this.dim, this.dim);
       }
   }
 
@@ -312,23 +203,8 @@ class Pacman{
     var j = testLib.snap(this.y, this.dim) / this.dim;
     fill("yellow");
 
-    // if(this.i - 2 === i){
-    //   this.i = i + 1;
-    // }
-    // if(this.i + 1 === i){
-    //   this.i = i;
-    // }
-    // if(this.j - 2 === j){
-    //   this.j = j + 1;
-    // }
-    // if(this.j + 1 === j){
-    //   this.j = j;
-    // }
-
     rect(this.x, this.y, this.dim, this.dim);
     fill("black");
     text(this.i + ", " + this.j, this.x + this.dim / 2 , this.y + this.dim / 2);
-    // if(i = )
-    //ellipse(this.x + this.dim / 2, this.y + this.dim / 2, 3, 3);
   }
 }
