@@ -5,11 +5,12 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Responsive Sticky Navbar</title>
+      <title>パックマン </title>
       <link rel="stylesheet" href="style.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
       <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+   
 </head>
 
 <body>
@@ -92,6 +93,19 @@
 
 
       </script>
+        <audio id="audio_bgm" autoplay="autoplay">
+        <source src="audio.mp3" />
+    </audio>
+    <button id="togglebgm"></button>
+    <script>
+        var audio = document.getElementById('audio_bgm');
+        document.getElementById('togglebgm').addEventListener('click', function (e){
+            e = e || window.event;
+            audio.muted = !audio.muted;
+            e.preventDefault();
+            $(this).toggleClass('mute');
+        }, false);
+        </script> 
 
 </body>
 
