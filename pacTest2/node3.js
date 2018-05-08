@@ -21,6 +21,14 @@ class Node3{
     // textSize(50);
     // text(this.fCost, this.i * this.dim + this.dim / 2 - 15, this.j * this.dim + this.dim / 2 + 20);
   }
+
+  showNeighbors(){
+    for(var i = 0; i < this.neighbors.length; i++){
+      fill("orange");
+      rect(this.neighbors[i].i * this.neighbors[i].dim, this.neighbors[i].j * this.neighbors[i].dim, this.neighbors[i].dim, this.neighbors[i].dim);
+    }
+  }
+
   setG(g){
     this.gCost = g;
   }
@@ -45,6 +53,10 @@ class Node3{
     this.hCost = 0;
     this.fCost = 0;
     this.parrent = undefined;
+  }
+
+  getNeighbors(){
+    return this.neighbors;
   }
 
   setNeighbors(grid, cols, rows){

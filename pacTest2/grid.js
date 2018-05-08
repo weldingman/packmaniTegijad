@@ -1,7 +1,9 @@
 class Grid{
-  constructor(nodes, dim){
+  constructor(nodes, dim, cols, rows){
     this.dim = dim;
     this.nodes = nodes;
+    this.cols = cols;
+    this.rows = rows;
   }
   show(){
     for(var i = 0; i < this.nodes.length; i++){
@@ -31,4 +33,9 @@ class Grid{
       }
     }
   }
-}
+  setNodesNeighbors(){
+    for(var k = 0; k < this.nodes.length; k++){
+        this.nodes[k].setNeighbors(this, this.cols, this.rows);
+    }
+  }
+} 
