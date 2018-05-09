@@ -1,24 +1,25 @@
 class AStar{
-  constructor(cols, rows, dim, wall){
-    this.arrDim = cols * rows;
-    this.dim = dim;
+  constructor(wall, grid, startP, targetP){
+    // this.arrDim = cols * rows;
+    // this.dim = dim;
     this.wall = wall;
     this.openList = [];
     this.closedList = [];
-    this.nodeArr = new Array(this.arrDim);
-    var counter = 0;
-    for(var i = 0; i < cols; i++){
-      for(var j = 0; j < rows; j++){
-        this.nodeArr[counter] = new Node3(i, j, "yellow", dim);
-        counter++;
-      }
-    }
-    this.grid = new Grid(this.nodeArr, dim);
-    for(var i = 0; i < this.grid.nodes.length; i++){
-      this.grid.nodes[i].setNeighbors(this.grid, cols, rows);
-    }
-    this.start = this.grid.getNode(2,2);
-    this.end = this.grid.getNode(5,5);
+    // this.nodeArr = new Array(this.arrDim);
+    this.grid = grid;
+    // var counter = 0;
+    // for(var i = 0; i < cols; i++){
+    //   for(var j = 0; j < rows; j++){
+    //     this.nodeArr[counter] = new Node3(i, j, "yellow", dim);
+    //     counter++;
+    //   }
+    // }
+    // this.grid = new Grid(this.nodeArr, dim);
+    // for(var i = 0; i < this.grid.nodes.length; i++){
+    //   this.grid.nodes[i].setNeighbors(this.grid, cols, rows);
+    // }
+    this.start = this.grid.getNode(startP.i, startP.j);
+    this.end = this.grid.getNode(targetP.i, targetP.j);
     for(var i = 0; i < this.grid.nodes.length; i++){
       for(var j = 0; j < this.wall.length; j++){
         if(i === this.wall[j]){
@@ -48,10 +49,7 @@ class AStar{
       this.updateNeighborsValues(current);
       this.delElInList(current, this.openList);
       this.closedList.push(current);
-      //console.log(this.start);
-      //console.log(this.end.i + " " + this.end.j);
       if(current === this.end){
-        //console.log("end");
         return this.path(current, this.start);
       }
       else{
@@ -60,7 +58,6 @@ class AStar{
       if(this.openList.length <= 0){
         loop = false
         console.log(current);
-        //console.log(this.openList);
         console.log("no solutions.");
       }
     }
@@ -78,10 +75,10 @@ class AStar{
     }
   }
 
-  snap(val, dim){
-    var snapCndidate = dim * Math.floor(val/dim);
-    return snapCndidate;
-  }
+  // snap(val, dim){
+  //   var snapCndidate = dim * Math.floor(val/dim);
+  //   return snapCndidate;
+  // }
 
   path(from, start){
     var pathToStart = [];

@@ -4,7 +4,7 @@ var help = {
     for(var i = 0; i < cols; i++){
       for(var j = 0; j < rows; j++){
         var index = this.getIndex(i,j, rows);
-        nodes.push(new Node3(i, j, "yellow", dim));
+        nodes.push(new Node3(i, j, "yellow", dim, "free"));
       }
     }
     return nodes;

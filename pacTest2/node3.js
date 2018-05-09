@@ -1,5 +1,5 @@
 class Node3{
-  constructor(i, j, col, dim){
+  constructor(i, j, col, dim, type){
     this.i = i;
     this.j = j;
     this.col = col;
@@ -9,11 +9,17 @@ class Node3{
     this.neighbors = [];
     this.dim = dim;
     this.parrent = undefined;
-    this.wall = false;
+    this.type = type;
+    this.pathNum = -1;
   }
   show(){
     fill(this.col);
     rect(this.i * this.dim, this.j * this.dim, this.dim, this.dim);
+    if(this.type === "path"){
+      fill(0);
+      textSize(16);
+      text(this.pathNum, this.i * this.dim + 5, this.j * this.dim + 15);
+    }
     // fill(0);
     // textSize(16);
     // text(this.gCost, this.i * this.dim + 5, this.j * this.dim + 15);
@@ -29,6 +35,18 @@ class Node3{
     }
   }
 
+  setPath(num){
+    this.pathNum = num;
+    this.col = "green";
+    this.type = "path";
+  }
+
+  setFree(){
+    this.pathNum = -1;
+    this.col = "yellow";
+    this.type = "free";
+  }
+
   setG(g){
     this.gCost = g;
   }
@@ -41,11 +59,14 @@ class Node3{
   setCol(col){
     this.col = col;
   }
+  setType(type){
+    this.type = type;
+  }
   setParrent(parrent){
     this.parrent = parrent;
   }
   setToWall(){
-    this.wall = true;
+    this.type = "wall";
     this.col = "grey";
   }
   resetNode(){

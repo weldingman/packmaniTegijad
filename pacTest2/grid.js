@@ -18,6 +18,9 @@ class Grid{
     }
     return null;
   }
+  getNodeArr(){
+    return this.nodes;
+  }
   resetNodesVal(){
     for(var i = 0; i < this.nodes.length; i++){
       this.nodes[i].resetNode();
@@ -38,4 +41,4 @@ class Grid{
         this.nodes[k].setNeighbors(this, this.cols, this.rows);
     }
   }
-} 
+}
