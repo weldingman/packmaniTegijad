@@ -1,7 +1,7 @@
 
-var dim = 60;
-var cols = 15;
-var rows = 15;
+var dim = 30;
+var cols = 30;
+var rows = 30;
 var windWith = dim * cols;
 var winHeight = dim * rows;
 var nodeArr = [];
@@ -42,28 +42,32 @@ function draw(){
 			pacman.followPath(neighbors[i].i, neighbors[i].j, neighbors[i].pathNum);
 		}
 	}
-  if(mouseIsPressed && mc){
-		delPath(path);
-    var i = help.snap(mouseX, dim) / dim;
-    var j = help.snap(mouseY, dim) / dim;
-    var test = help.getIndex(i, j, rows);
-		aStar.targetUpdate(lastStart, {i:i,j:j});
-		path = aStar.calcPath();
-    setNodeFromArr(nodeArr, i, j, "red", rows);
-		if(path != undefined){
-			setPathNodes(path);
+  if(mouseIsPressed){
+		var i = help.snap(mouseX, dim) / dim;
+		var j = help.snap(mouseY, dim) / dim;
+		if(help.keys().w){
+
+			var node = grid.getNode(i, j);
+			node.setToWall();
+			var test = grid.getNodesByType("wall");
+			aStar.setWall(test);
 		}
-    var node = grid.getNode(i, j);
-    node.showNeighbors();
-		lastStart = {i:i, j:j};
-    mc = false;
+		else if(mc){
+	    var test = help.getIndex(i, j, rows);
+			pacman.newPath();
+			delPath(path);
+			aStar.targetUpdate({i:pacman.i, j:pacman.j}, {i:i,j:j});
+			path = aStar.calcPath();
+	    setNodeFromArr(nodeArr, i, j, "red", rows, "free");
+			if(path != undefined){
+				setPathNodes(path);
+			}
+	    var node = grid.getNode(i, j);
+	    node.showNeighbors();
+			lastStart = {i:i, j:j};
+			mc = false;
+		}
   }
-  // if(mc){
-  //   var path = getPath(nodeArr);
-  //   followThePath(path);
-  // }
-
-
 }
 
 function setPathNodes(path){
@@ -78,16 +82,6 @@ function delPath(path){
 	}
 }
 
-function setPath(start, target){
-
-}
-
-function getPath(){
-  for(var k = 0; k < 0; k++){
-
-  }
-}
-
 function mouseReleased() {
   mc = true;
 }
@@ -96,7 +90,7 @@ function setNodeFromArrIndex(nodes, index, col){
   nodes[index].setCol(col);
 }
 
-function setNodeFromArr(nodes, i, j, col, rows){
+function setNodeFromArr(nodes, i, j, col, rows, type){
   var index = help.getIndex(i, j, rows);
-  nodes[index].setCol(col);
+  nodes[index].set(col, type);
 }

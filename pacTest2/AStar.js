@@ -64,6 +64,10 @@ class AStar{
     return undefined;
   }
 
+  setWall(wallIn){
+    this.wall = wallIn;
+    this.updateWall();
+  }
 
   updateWall(){
     for(var i = 0; i < this.grid.nodes.length; i++){
@@ -83,10 +87,12 @@ class AStar{
   path(from, start){
     var pathToStart = [];
     var current = from;
+    pathToStart.push(from);
     while(current != start){
       current = current.parrent;
       pathToStart.push(current);
     }
+
     return pathToStart;
   }
 
@@ -139,7 +145,7 @@ class AStar{
       for(var i = 0; i < current.neighbors.length; i++){
         if(!this.isInList(this.closedList, current.neighbors[i])){
           if(!this.isInList(this.openList, current.neighbors[i])){
-            if(!current.neighbors[i].wall){
+            if(current.neighbors[i].type != "wall"){
               if(current.neighbors[i].fCost === lowestF){
                 sameFVal.push(current.neighbors[i]);
               }

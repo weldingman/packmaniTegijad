@@ -47,10 +47,10 @@ class AStar{
 
   calcPath(){
     var loop = true;
-    this.grid.resetNodesVal();
-    this.openList = [];
-    this.closedList = [];
-    this.openList.push(this.start);
+    // this.grid.resetNodesVal();
+    // this.openList = [];
+    // this.closedList = [];
+    // this.openList.push(this.start);
 
     while(loop){
       var current = this.chooseCurrent(this.openList);

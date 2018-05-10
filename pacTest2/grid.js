@@ -18,14 +18,27 @@ class Grid{
     }
     return null;
   }
+
   getNodeArr(){
     return this.nodes;
   }
+
   resetNodesVal(){
     for(var i = 0; i < this.nodes.length; i++){
       this.nodes[i].resetNode();
     }
   }
+
+  getNodesByType(type){
+    var output = [];
+    for(var i = 0; i < this.nodes.length; i++){
+      if(this.nodes[i].type === type){
+        output.push(this.nodes[i]);
+      }
+    }
+    return output;
+  }
+
   setNode(node){
     //console.log(node);
     var i = node.i;

@@ -35,6 +35,11 @@ class Node3{
     }
   }
 
+ set(col, type){
+   this.setCol = col;
+   this.setType = type;
+ }
+
   setPath(num){
     this.pathNum = num;
     this.col = "green";

@@ -6,33 +6,36 @@ class Pacman{
     this.j = pos.j;
     this.dim = dim;
     this.followPathIndex = 1;
+    this.speed = 15;
   }
   show(){
     fill("blue");
     rect(this.x ,this.y, this.dim, this.dim);
+    fill(0);
+    text(this.x + " " + this.y, this.x ,this.y)
   }
   getPosIJ(){
     return {i:this.i, j:this.j};
   }
 
   newPath(){
-    this.followPathIndex = 0;
+    this.followPathIndex = 1;
   }
 
   updateIJ(){
-    if(this.x < (this.i - 2) * this.dim + this.dim){
+    if(this.x < (this.i - 2) * this.dim + this.dim + 1){
       this.followPathIndex += 1;
       this.i -= 1;
     }
-    if(this.x + this.dim > (this.i + 2) * this.dim){
+    if(this.x + this.dim + 1 > (this.i + 2) * this.dim){
       this.followPathIndex += 1;
       this.i += 1;
     }
-    if(this.y < (this.j - 2) * this.dim + this.dim){
+    if(this.y - 1 < (this.j - 2) * this.dim + this.dim){
       this.followPathIndex += 1;
       this.j -= 1;
     }
-    if(this.x + this.dim > (this.i + 2) * this.dim){
+    if(this.y + this.dim + 1 > (this.j + 2) * this.dim){
       this.followPathIndex += 1;
       this.j += 1;
     }
@@ -40,20 +43,19 @@ class Pacman{
   }
 
   followPath(i,j,index){
-    console.log(index);
     this.updateIJ();
     if(this.followPathIndex === index){
       if(i > this.i){
-        this.x += 1;
+        this.x += this.speed;
       }
       if(i < this.i){
-        this.x -= 1;
+        this.x -= this.speed;
       }
       if(j > this.j){
-        this.y += 1;
+        this.y += this.speed;
       }
       if(j < this.j){
-        this.y -= 1;
+        this.y -= this.speed;
       }
     }
   }
