@@ -70,10 +70,12 @@ class Node3{
   setParrent(parrent){
     this.parrent = parrent;
   }
+
   setToWall(){
     this.type = "wall";
     this.col = "grey";
   }
+
   resetNode(){
     this.gCost = 0;
     this.hCost = 0;

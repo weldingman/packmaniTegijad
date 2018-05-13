@@ -5,19 +5,8 @@ class AStar{
     this.wall = wall;
     this.openList = [];
     this.closedList = [];
-    // this.nodeArr = new Array(this.arrDim);
     this.grid = grid;
-    // var counter = 0;
-    // for(var i = 0; i < cols; i++){
-    //   for(var j = 0; j < rows; j++){
-    //     this.nodeArr[counter] = new Node3(i, j, "yellow", dim);
-    //     counter++;
-    //   }
-    // }
-    // this.grid = new Grid(this.nodeArr, dim);
-    // for(var i = 0; i < this.grid.nodes.length; i++){
-    //   this.grid.nodes[i].setNeighbors(this.grid, cols, rows);
-    // }
+
     this.start = this.grid.getNode(startP.i, startP.j);
     this.end = this.grid.getNode(targetP.i, targetP.j);
     for(var i = 0; i < this.grid.nodes.length; i++){
@@ -36,8 +25,6 @@ class AStar{
       this.end = this.grid.getNode(targetPos.i, targetPos.j);
       this.openList = [];
       this.closedList = [];
-      // var i = snap(mouseX, dim) / dim;
-      // var j = snap(mouseY, dim) / dim;
       this.openList.push(this.start);
   }
 
@@ -66,14 +53,15 @@ class AStar{
 
   setWall(wallIn){
     this.wall = wallIn;
-    this.updateWall();
   }
 
   updateWall(){
+    console.log(this.wall.length);
     for(var i = 0; i < this.grid.nodes.length; i++){
       for(var j = 0; j < this.wall.length; j++){
-        if(this.grid.nodes[i] === this.wall[j]){
+        if(this.grid.nodes[i].i === this.wall[j].i && this.grid.nodes[i].j === this.wall[j].j){
           this.grid.nodes[i].setToWall();
+
         }
       }
     }

@@ -39,6 +39,14 @@ class Grid{
     return output;
   }
 
+  // setNodes(nodeArr){
+  //   for(var k = 0; k < this.nodeArr.length; k++){
+  //     var index = help.getIndex(this.nodes[k].i, this.nodes[k].j);
+  //       this.nodes[index] = this.nodeArr[k];
+  //     }
+  //   }
+  // }
+
   setNode(node){
     //console.log(node);
     var i = node.i;
@@ -49,6 +57,7 @@ class Grid{
       }
     }
   }
+
   setNodesNeighbors(){
     for(var k = 0; k < this.nodes.length; k++){
         this.nodes[k].setNeighbors(this, this.cols, this.rows);
