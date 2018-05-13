@@ -6,7 +6,7 @@ class Pacman{
     this.j = pos.j;
     this.dim = dim;
     this.followPathIndex = 1;
-    this.speed = 1;
+    this.speed = 5;
   }
   show(){
     fill("blue");
