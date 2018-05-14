@@ -35,8 +35,8 @@ function setup() {
 	walls = walls2.wall.wall;
 	// new code--------------------------------
 	pacman = new Agent(cols, rows, dim, walls, start, 5);
-	ghost = new Agent(cols, rows, dim, walls, start, 2);
-	ghost2 = new Agent(cols, rows, dim, walls, {i:28, j:22}, 2);
+	ghost = new Agent(cols, rows, dim, walls, {i:1, j:22}, 2);
+	ghost2 = new Agent(cols, rows, dim, walls, {i:29, j:22}, 2);
 	pacman.showGrid = true;
 	// end new code ---------------------------
 	//
