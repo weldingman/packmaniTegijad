@@ -67,10 +67,6 @@ class AStar{
     }
   }
 
-  // snap(val, dim){
-  //   var snapCndidate = dim * Math.floor(val/dim);
-  //   return snapCndidate;
-  // }
 
   path(from, start){
     var pathToStart = [];

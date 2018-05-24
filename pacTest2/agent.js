@@ -5,6 +5,8 @@ class Agent{
     this.nodeArr = help.createEmptyNodesGrid(cols, rows, dim);
     this.grid = new Grid(this.nodeArr, dim, cols, rows);
 
+    this.dim = dim;
+    this.walls = walls;
     this.grid.setNodesNeighbors();
   	this.aStar = new AStar(walls, this.grid, start, {i:5, j:5});
   	this.aStar.setWall(walls);
@@ -15,6 +17,7 @@ class Agent{
     this.path = [];
     this.mc = true;
     this.showGrid = false;
+    this.keys = true;
   }
 
   update(md, i, j){
@@ -22,22 +25,53 @@ class Agent{
       this.grid.show();
     }
     this.agent.show();
-    var pos = this.followPath();
+    if(this.keys){
+      var pos = this.moveKeys();
+    }
+    else{
+      var pos = this.followPath();
 
-    if(md && this.mc){
-  		if(help.keys().w){
-  			this.buildWall();
-  		}
-  		else if(this.mc){
-  			this.updatePath(i,j);
-  			this.mc = false;
-        console.log("path updated");
-  		}
+      if(md && this.mc){
+    		if(help.keys().w){
+    			this.buildWall();
+    		}
+    		else if(this.mc){
+    			this.updatePath(i,j);
+    			this.mc = false;
+          console.log("path updated");
+    		}
+      }
+      if(!md){
+        this.mc = true;
+      }
     }
-    if(!md){
-      this.mc = true;
-    }
+
     return pos;
+  }
+  moveKeys(){
+    var pos = this.agent.getPosXY();
+    var wallIn = [];
+    var i = help.snap(pos.x, this.dim) / this.dim;
+    var j = help.snap(pos.y, this.dim) / this.dim;
+    var node = this.grid.getNode(i, j);
+    var neighbors = node.getNeighbors();
+    for(var k = 0; k < neighbors.length; k++){
+      if(neighbors[k].type === "wall"){
+        wallIn.push(neighbors[k]);
+      }
+    }
+    this.agent.moveTo(wallIn);
+    return {i:i, j:j};
+  }
+
+  getWall(wall, i ,j){
+    for(var k = 0; k < wall.length; k++){
+      // console.log(wall[k].i  + " " + wall[k].j);
+      if(wall[k].i === i && wall[k].j === j){
+        return true;
+      }
+    }
+    return false;
   }
 
   followPath(){
